@@ -2,8 +2,6 @@
 
 /** @var \Laravel\Lumen\Routing\Router $router */
 
-use App\Http\Controllers\WebhookController;
-
 /*
 |--------------------------------------------------------------------------
 | Application Routes
@@ -24,4 +22,4 @@ $router->get('/key', function(){
 });
 
 $router->post('/webhook', [WebhookController::class, 'index']);
-$router->get('/webhook', [WebhookController::class, 'coba']);
+$router->get('/webhook', 'Webhook');

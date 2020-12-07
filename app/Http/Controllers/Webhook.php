@@ -17,7 +17,7 @@ use LINE\LINEBot\MessageBuilder\TemplateMessageBuilder;
 use LINE\LINEBot\MessageBuilder\TextMessageBuilder;
 use LINE\LINEBot\TemplateActionBuilder\MessageTemplateActionBuilder;
 
-class WebhookController extends Controller
+class Webhook extends Controller
 {
     private $bot;
     private $request;
@@ -119,6 +119,6 @@ class WebhookController extends Controller
     }
 
     public function coba(){
-        return "sempak";
+        return "";
     }
 }
