@@ -2,6 +2,8 @@
 
 /** @var \Laravel\Lumen\Routing\Router $router */
 
+use App\Http\Controllers\WebhookController;
+
 /*
 |--------------------------------------------------------------------------
 | Application Routes
@@ -21,4 +23,4 @@ $router->get('/key', function(){
     return \Illuminate\Support\Str::random(32);
 });
 
-$router->post('/webhook', 'Webhook@index');
+$router->post('/webhook', [WebhookController::class, 'index']);
