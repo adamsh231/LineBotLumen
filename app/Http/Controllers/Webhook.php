@@ -117,4 +117,8 @@ class WebhookController extends Controller
         }
         // ----------------------------------------------------------------------------------------- //
     }
+
+    public function coba(){
+        return "sempak";
+    }
 }

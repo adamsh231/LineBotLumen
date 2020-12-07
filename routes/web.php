@@ -24,3 +24,4 @@ $router->get('/key', function(){
 });
 
 $router->post('/webhook', [WebhookController::class, 'index']);
+$router->get('/webhook', [WebhookController::class, 'coba']);
