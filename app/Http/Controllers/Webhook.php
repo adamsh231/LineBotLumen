@@ -56,8 +56,7 @@ class Webhook extends Controller
                             $profile = $getprofile->getJSONDecodedBody();
                             $greetings = new TextMessageBuilder("Halo, " . $profile['displayName']);
 
-                            $result = $this->bot->replyMessage($event['replyToken'], $greetings);
-                            return $result;
+                            $result = $this->bot->replyMessage($event['replyToken'], $greetings); //* Result *//
                         }
                     } else {
                         //! Message From Single User !//
@@ -81,9 +80,8 @@ class Webhook extends Controller
                                     ],
                                 ]);
                             } else {
-                                $result = $this->bot->replyText($event['replyToken'], $text);
+                                $result = $this->bot->replyText($event['replyToken'], $text); //* Result *//
                             }
-                            return $result;
                         } elseif (
                             $event['message']['type'] == 'image' or
                             $event['message']['type'] == 'video' or
@@ -95,8 +93,7 @@ class Webhook extends Controller
                             $result = $this->bot->replyText(
                                 $event['replyToken'],
                                 $contentType . " yang Anda kirim bisa diakses dari link:\n " . $contentURL
-                            );
-                            return $result;
+                            ); //* Result *//
                         }
                     }
                 }
