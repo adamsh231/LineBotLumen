@@ -23,6 +23,8 @@ class WebhookController extends Controller
     private $request;
     private $response;
     private $httpClient;
+    private $WEB_URL = "https://shoesmartlinebot.herokuapp.com/";
+
 
     public function __construct(Request $request, Response $response)
     {
@@ -98,7 +100,7 @@ class WebhookController extends Controller
                             $event['message']['type'] == 'audio' or
                             $event['message']['type'] == 'file'
                         ) {
-                            $contentURL =  $WEB_URL . "public/content/" . $event['message']['id'];
+                            $contentURL =  $this->WEB_URL . "content/" . $event['message']['id'];
                             $contentType = ucfirst($event['message']['type']);
                             $result = $this->bot->replyText(
                                 $event['replyToken'],
