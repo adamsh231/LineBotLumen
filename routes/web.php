@@ -21,5 +21,4 @@ $router->get('/key', function(){
     return \Illuminate\Support\Str::random(32);
 });
 
-$router->post('/webhook', [WebhookController::class, 'index']);
-$router->get('/webhook', 'Webhook');
+$router->post('/webhook', 'Webhook@index');
