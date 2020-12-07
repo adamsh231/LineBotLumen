@@ -38,10 +38,6 @@ class Webhook extends Controller
 
     public function index()
     {
-        $body = $this->request->getBody();
-
-        // $signature = $this->request->getHeaderLine('HTTP_X_LINE_SIGNATURE');
-        file_put_contents('php://stderr', 'Body: ' . $body);
         // -------------------------------------Reply Messages------------------------------------- //
         // TODO: Reply Sticker, More Messages or Images
         $data = $this->request->all();
