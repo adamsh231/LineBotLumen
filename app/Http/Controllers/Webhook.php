@@ -57,7 +57,6 @@ class Webhook extends Controller
                             $greetings = new TextMessageBuilder("Halo, " . $profile['displayName']);
 
                             $result = $this->bot->replyMessage($event['replyToken'], $greetings);
-                            $this->response->getBody()->write(json_encode($result->getJSONDecodedBody()));
                             return $this->response
                                 ->withHeader('Content-Type', 'application/json')
                                 ->withStatus($result->getHTTPStatus());
@@ -86,7 +85,6 @@ class Webhook extends Controller
                             } else {
                                 $result = $this->bot->replyText($event['replyToken'], $text);
                             }
-                            $this->response->getBody()->write(json_encode($result->getJSONDecodedBody()));
                             return $this->response
                                 ->withHeader('Content-Type', 'application/json')
                                 ->withStatus($result->getHTTPStatus());
@@ -102,7 +100,6 @@ class Webhook extends Controller
                                 $event['replyToken'],
                                 $contentType . " yang Anda kirim bisa diakses dari link:\n " . $contentURL
                             );
-                            $this->response->getBody()->write(json_encode($result->getJSONDecodedBody()));
                             return $this->response
                                 ->withHeader('Content-Type', 'application/json')
                                 ->withStatus($result->getHTTPStatus());
