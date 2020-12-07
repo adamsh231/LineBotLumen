@@ -41,7 +41,7 @@ class WebhookController extends Controller
         $body = $this->request->getBody();
 
         // $signature = $this->request->getHeaderLine('HTTP_X_LINE_SIGNATURE');
-        // file_put_contents('php://stderr', 'Body: ' . $body);
+        file_put_contents('php://stderr', 'Body: ' . $body);
         // -------------------------------------Reply Messages------------------------------------- //
         // TODO: Reply Sticker, More Messages or Images
         $data = json_decode($body, true);
