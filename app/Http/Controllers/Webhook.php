@@ -44,7 +44,7 @@ class Webhook extends Controller
         file_put_contents('php://stderr', 'Body: ' . $body);
         // -------------------------------------Reply Messages------------------------------------- //
         // TODO: Reply Sticker, More Messages or Images
-        $data = json_decode($body, true);
+        $data = $this->request->all();
         if (is_array($data['events'])) {
             foreach ($data['events'] as $event) {
                 if ($event['type'] == 'message') {
