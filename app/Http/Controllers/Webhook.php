@@ -79,6 +79,23 @@ class Webhook extends Controller
             ->header('Content-Type', $result->getHeader('Content-Type'));
         return $response;
     }
+
+    public function pushMessage()
+    {
+        //! -----------------@Line Developers----------------- !//
+        $userId = 'Ub383312db4a3d9ec89d2afedbac32e24'; // My Account
+        //! -------------------------------------------------- !//
+
+        $textMessageBuilder = new TextMessageBuilder('Halo, ini pesan push');
+        $result = $this->bot->pushMessage($userId, $textMessageBuilder);
+
+        $response = $this->response
+            ->setContent("Pesan push berhasil dikirim!")
+            ->header('Content-Type', 'application/json')
+            ->setStatusCode($result->getHTTPStatus());
+
+        return $response;
+    }
     //* ------------------------------------------------------------------------------------------------------------------- *//
 
 
@@ -113,6 +130,7 @@ class Webhook extends Controller
         return $result;
     }
 
+    //TODO: Under Development Soon!
     private function replyGroupOrRoom($event)
     {
         $result = $this->RESULT_DEFAULT_MESSAGE;
