@@ -144,6 +144,8 @@ class Webhook extends Controller
             $greetings = $this->DEFAULT_GREETINGS;
             if (strtolower($event['message']['text']) == 'new') {
                 $result = $this->flexListNewArrival($event);
+            } else if(strtolower($event['message']['text']) == 'sticker'){
+                $result = $this->replySticker($event, 1, 14);
             } else {
                 $result = $this->bot->replyText($event['replyToken'], $greetings);
             }
@@ -191,6 +193,12 @@ class Webhook extends Controller
         return $result;
     }
 
+    private function replySticker($event, $sticker_package = 1, $sticker_id = 14){
+        $stickerMessageBuilder = new StickerMessageBuilder($sticker_package, $sticker_id);
+        $result = $this->bot->replyMessage($event['replyToken'], $stickerMessageBuilder);
+        return $result;
+    }
+
     private function registerUser($event)
     {
         $data["line_id"] = $event['source']['userId'];
@@ -231,6 +239,8 @@ class Webhook extends Controller
         }
         return $this->replyFlexMessage($event, $json);
     }
+
+
 
     //* ------------------------------------------------------------------------------------------------------------------- *//
 }
