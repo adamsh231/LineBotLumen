@@ -113,6 +113,6 @@ class Webhook extends Controller
         $response = (new Response($result->getRawBody(), $result->getHTTPStatus()));
         $response->header('Content-Type', $result->getHeader('Content-Type'));
         // print("<pre>".print_r($result,true)."</pre>");
-        return $this->response;
+        return $response;
     }
 }
