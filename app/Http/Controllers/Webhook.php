@@ -2,12 +2,8 @@
 
 namespace App\Http\Controllers;
 
-use App\Gateway\EventLogGateway;
-use App\Gateway\QuestionGateway;
-use App\Gateway\UserGateway;
 use Illuminate\Http\Request;
 use Illuminate\Http\Response;
-use Illuminate\Log\Logger;
 use LINE\LINEBot;
 use LINE\LINEBot\HTTPClient\CurlHTTPClient;
 use LINE\LINEBot\MessageBuilder\MultiMessageBuilder;
