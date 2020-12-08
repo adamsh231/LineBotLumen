@@ -99,12 +99,12 @@
           "alignItems": "center",
           "spacing": "none",
           "paddingTop": "sm",
-          "paddingBottom": "sm"
-        },
-        "action": {
-          "type": "uri",
-          "label": "action",
-          "uri": "http://example.com/"
+          "paddingBottom": "sm",
+          "action": {
+            "type": "uri",
+            "label": "action",
+            "uri": "http://linecorp.com/"
+          }
         }
       }
     ]
