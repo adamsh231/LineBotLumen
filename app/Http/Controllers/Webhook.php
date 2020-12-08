@@ -26,7 +26,6 @@ class Webhook extends Controller
 
     private $WEB_URL = "https://shoesmartlinebot.herokuapp.com/";
     private $WEB_URL_OFFICIAL = "https://shoesmart.co.id/";
-    private $RESULT_DEFAULT_MESSAGE = "Unknown Events!";
     private $DEFAULT_GREETINGS = "Halo, Shoesmarter!";
     private $WEB_URL_API = "https://api.shoesmart.co.id/";
     private $NEW_ARRIVAL = "[5694,5297,5336,5308,5188,4507,5015,4891,5063,5027]";
@@ -59,17 +58,12 @@ class Webhook extends Controller
     public function reply()
     {
         $data = $this->data;
-        $result = $this->RESULT_DEFAULT_MESSAGE;
         if (is_array($data['events'])) {
             foreach ($data['events'] as $event) {
                 if ($event['type'] == 'message') {
-                    $result = $this->replyMessage($event);
+                    $this->replyMessage($event);
                 }
             }
-            $result = $this->response->setStatusCode($result->getHTTPStatus());
-            return $result;
-        } else {
-            return $result;
         }
     }
 
@@ -90,18 +84,15 @@ class Webhook extends Controller
     {
         $data["line_id"] = $event['source']['userId'];
         $data["name"] = $this->getDisplayName($data["line_id"]);
-        $user = (new User)->register($data);
-        return $user;
+        (new User)->register($data);
     }
 
     private function replyMessage($event)
     {
-        $result = $this->RESULT_DEFAULT_MESSAGE;
-        $greetings = $this->DEFAULT_GREETINGS;
         if ($event['message']['type'] == 'text') {
             if ($this->isCommand($event['message']['text'])) {
                 if ($event['message']['text'] == $this->COMMAND['new_arrival']) {
-                    $result = $this->newArrival($event);
+                    $this->newArrival($event);
                 }
             } else {
                 //TODO: reply user if not command
@@ -109,7 +100,6 @@ class Webhook extends Controller
         } else {
             //TODO: reply user if not text message
         }
-        return $result;
     }
 
     private function isCommand($text)
@@ -132,7 +122,7 @@ class Webhook extends Controller
             $json["contents"][$key]["footer"]["action"]["uri"] = $this->WEB_URL_OFFICIAL . "product/" . $value["id"] . "/0";
         }
 
-        $result = $this->httpClient->post(LINEBot::DEFAULT_ENDPOINT_BASE . '/v2/bot/message/reply', [
+        $this->httpClient->post(LINEBot::DEFAULT_ENDPOINT_BASE . '/v2/bot/message/reply', [
             'replyToken' => $event['replyToken'],
             'messages'   => [
                 [
@@ -142,8 +132,6 @@ class Webhook extends Controller
                 ]
             ],
         ]);
-
-        return $result;
     }
 
     private function getProductNewArrival()
