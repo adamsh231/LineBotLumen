@@ -49,7 +49,7 @@ class Webhook extends Controller
 
     //* ----------------------------------------- PUBLIC METHOD ------------------------------------------------- *//
 
-    // TODO: Reply Sticker, More Messages or Images
+    //TODO: Images, Audio and Video
     public function reply()
     {
         $result = $this->RESULT_DEFAULT_MESSAGE;
@@ -144,8 +144,10 @@ class Webhook extends Controller
             $greetings = $this->DEFAULT_GREETINGS;
             if (strtolower($event['message']['text']) == 'new') {
                 $result = $this->flexListNewArrival($event);
-            } else if(strtolower($event['message']['text']) == 'sticker'){
+            } else if (strtolower($event['message']['text']) == 'sticker') {
                 $result = $this->replySticker($event, 1, 14);
+            } else if (strtolower($event['message']['text']) == 'more') {
+                $result = $this->replyMultipleMessages($event);
             } else {
                 $result = $this->bot->replyText($event['replyToken'], $greetings);
             }
@@ -193,7 +195,8 @@ class Webhook extends Controller
         return $result;
     }
 
-    private function replySticker($event, $sticker_package = 1, $sticker_id = 14){
+    private function replySticker($event, $sticker_package = 1, $sticker_id = 14)
+    {
         $stickerMessageBuilder = new StickerMessageBuilder($sticker_package, $sticker_id);
         $result = $this->bot->replyMessage($event['replyToken'], $stickerMessageBuilder);
         return $result;
@@ -240,7 +243,21 @@ class Webhook extends Controller
         return $this->replyFlexMessage($event, $json);
     }
 
+    private function replyMultipleMessages($event)
+    {
+        $textMessageBuilder1 = new TextMessageBuilder('ini pesan balasan pertama');
+        $textMessageBuilder2 = new TextMessageBuilder('ini pesan balasan kedua');
+        $stickerMessageBuilder = new StickerMessageBuilder(1, 106);
 
+        $multiMessageBuilder = new MultiMessageBuilder();
+        $multiMessageBuilder->add($textMessageBuilder1);
+        $multiMessageBuilder->add($textMessageBuilder2);
+        $multiMessageBuilder->add($stickerMessageBuilder);
+
+        $result = $this->bot->replyMessage($event["replyToken"], $multiMessageBuilder);
+
+        return $result;
+    }
 
     //* ------------------------------------------------------------------------------------------------------------------- *//
 }
