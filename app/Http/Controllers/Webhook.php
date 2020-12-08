@@ -26,8 +26,8 @@ class Webhook extends Controller
     private $request;
     private $response;
     private $httpClient;
+    private $flex_message_content;
 
-    private $FLEX_MESSAGE_CONTENT = json_decode(file_get_contents(url('flex/flex-message.json')), true);
     private $WEB_URL = "https://shoesmartlinebot.herokuapp.com/";
     private $RESULT_DEFAULT_MESSAGE = "Unknown Events!";
     private $DEFAULT_GREETINGS = "Assalamu'alaikum!";
@@ -39,6 +39,7 @@ class Webhook extends Controller
     {
         $this->request = $request;
         $this->response = $response;
+        $this->flex_message_content = json_decode(file_get_contents(url('flex/flex-message.json')), true);
 
         // create bot object
         $this->httpClient = new CurlHTTPClient(getenv('CHANNEL_ACCESS_TOKEN'));
@@ -165,7 +166,7 @@ class Webhook extends Controller
 
     private function flexListNewArrival($event)
     {
-        $json = $this->FLEX_MESSAGE_CONTENT;
+        $json = $this->flex_message_content;
         $product_new_arrival = $this->getProductNewArrival();
         foreach ($product_new_arrival as $key => $value) {
             $json["contents"][$key] = $json["contents"][0];
