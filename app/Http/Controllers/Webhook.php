@@ -65,8 +65,7 @@ class Webhook extends Controller
 
                             if (strtolower($event['message']['text']) == 'user id') {
 
-                                $this->bot->replyText($event['replyToken'], $text . ", ". $event['source']['userId']);
-
+                                $this->bot->replyText($event['replyToken'], $text . ", " . $event['source']['userId']);
                             } elseif (strtolower($event['message']['text']) == 'flex message') {
 
                                 $flexTemplate = file_get_contents(url('flex/flex-message.json')); // template flex message
@@ -80,11 +79,9 @@ class Webhook extends Controller
                                         ]
                                     ],
                                 ]);
-
                             } else {
 
                                 $this->bot->replyText($event['replyToken'], $text);
-
                             }
                         } elseif (
                             $event['message']['type'] == 'image' or
@@ -99,7 +96,6 @@ class Webhook extends Controller
                                 $event['replyToken'],
                                 $contentType . " yang Anda kirim bisa diakses dari link:\n " . $contentURL
                             );
-
                         }
                     }
                 }
@@ -108,11 +104,12 @@ class Webhook extends Controller
         // ----------------------------------------------------------------------------------------- //
     }
 
-    public function getContent($message_id){
+    public function getContent($message_id)
+    {
         $result = $this->bot->getMessageContent($message_id);
-        $response = (new Response($result->getRawBody(), $result->getHTTPStatus()));
-        $response->header('Content-Type', $result->getHeader('Content-Type'));
-        // print("<pre>".print_r($result,true)."</pre>");
+        $response = $this->response
+            ->setContent($result->getRawBody())
+            ->header('Content-Type', $result->getHeader('Content-Type'));
         return $response;
     }
 }
