@@ -126,6 +126,8 @@ class Webhook extends Controller
             ->setContent(json_encode($result->getJSONDecodedBody()))
             ->header('Content-Type', 'application/json')
             ->setStatusCode($result->getHTTPStatus());
+
+        return $response;
     }
     //* ----------------------------------------------------------------------------------------------------------- *//
 
