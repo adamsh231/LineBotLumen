@@ -29,6 +29,7 @@ class Webhook extends Controller
     private $flex_message_content;
 
     private $WEB_URL = "https://shoesmartlinebot.herokuapp.com/";
+    private $WEB_URL_OFFICIAL = "https://shoesmart.co.id/";
     private $RESULT_DEFAULT_MESSAGE = "Unknown Events!";
     private $DEFAULT_GREETINGS = "Assalamu'alaikum!";
     private $WEB_URL_API = "https://api.shoesmart.co.id/";
@@ -91,7 +92,7 @@ class Webhook extends Controller
         $result = $this->RESULT_DEFAULT_MESSAGE;
         if ($event['message']['type'] == 'text') {
             $greetings = $this->DEFAULT_GREETINGS;
-            if (strtolower($event['message']['text']) == 'new arrival') {
+            if (strtolower($event['message']['text']) == 'new') {
                 $result = $this->flexListNewArrival($event);
             } else {
                 $result = $this->bot->replyText($event['replyToken'], $greetings);
@@ -170,7 +171,12 @@ class Webhook extends Controller
         $product_new_arrival = $this->getProductNewArrival();
         foreach ($product_new_arrival as $key => $value) {
             $json["contents"][$key] = $json["contents"][0];
+            $json["contents"][$key]["hero"]["url"] = $value["image_url"];
             $json["contents"][$key]["body"]["contents"][0]["text"] = $value["name"];
+            $json["contents"][$key]["body"]["contents"][1]["contents"][0]["contents"][0]["text"] = $value["brand_name"];
+            $json["contents"][$key]["body"]["contents"][2]["text"] = "Rp " . number_format($value["price"], 0, ",", ".");
+            $json["contents"][$key]["body"]["contents"][3]["text"] = "Rp " . number_format($value["final_price"], 0, ",", ".");
+            $json["contents"][$key]["footer"]["contents"][0]["action"]["uri"] = $this->WEB_URL_OFFICIAL . "product/" . $value["id"] . "/0";
         }
         return $this->replyFlexMessage($event, $json);
     }
