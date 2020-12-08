@@ -21,5 +21,5 @@ $router->get('/key', function(){
     return \Illuminate\Support\Str::random(32);
 });
 
-$router->post('/webhook', 'Webhook@index');
+$router->post('/webhook', 'Webhook@reply');
 $router->get('/content/{message_id}', 'Webhook@getContent');

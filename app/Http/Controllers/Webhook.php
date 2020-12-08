@@ -24,6 +24,8 @@ class Webhook extends Controller
     private $response;
     private $httpClient;
     private $WEB_URL = "https://shoesmartlinebot.herokuapp.com/";
+    private $RESULT_DEFAULT_MESSAGE = "Unknown Events!";
+    private $DEFAULT_GREETINGS = "Assalamu'alaikum!";
 
 
     public function __construct(Request $request, Response $response)
@@ -36,72 +38,26 @@ class Webhook extends Controller
         $this->bot  = new LINEBot($this->httpClient, ['channelSecret' => getenv('CHANNEL_SECRET')]);
     }
 
-    public function index()
+    // TODO: Reply Sticker, More Messages or Images
+    public function reply()
     {
-        // -------------------------------------Reply Messages------------------------------------- //
-        // TODO: Reply Sticker, More Messages or Images
+        $result = $this->RESULT_DEFAULT_MESSAGE;
         $data = $this->request->all();
         if (is_array($data['events'])) {
             foreach ($data['events'] as $event) {
                 if ($event['type'] == 'message') {
-                    if (
-                        $event['source']['type'] == 'group' or
-                        $event['source']['type'] == 'room'
-                    ) {
-                        //! Message From Group !//
-                        if ($event['source']['userId']) {
-
-                            $userId = $event['source']['userId'];
-                            $getprofile = $this->bot->getProfile($userId);
-                            $profile = $getprofile->getJSONDecodedBody();
-                            $greetings = new TextMessageBuilder("Halo, " . $profile['displayName']);
-                            $this->bot->replyMessage($event['replyToken'], $greetings);
-                        }
+                    if ($event['source']['type'] == 'group' or $event['source']['type'] == 'room') {
+                        $result = $this->replyGroupOrRoom($event);
                     } else {
-                        //! Message From Single User !//
-                        if ($event['message']['type'] == 'text') {
-
-                            $text = "Assalamu'alaikum!";
-
-                            if (strtolower($event['message']['text']) == 'user id') {
-
-                                $this->bot->replyText($event['replyToken'], $text . ", " . $event['source']['userId']);
-                            } elseif (strtolower($event['message']['text']) == 'flex message') {
-
-                                $flexTemplate = file_get_contents(url('flex/flex-message.json')); // template flex message
-                                $this->httpClient->post(LINEBot::DEFAULT_ENDPOINT_BASE . '/v2/bot/message/reply', [
-                                    'replyToken' => $event['replyToken'],
-                                    'messages'   => [
-                                        [
-                                            'type'     => 'flex',
-                                            'altText'  => 'Test Flex Message',
-                                            'contents' => json_decode($flexTemplate)
-                                        ]
-                                    ],
-                                ]);
-                            } else {
-
-                                $this->bot->replyText($event['replyToken'], $text);
-                            }
-                        } elseif (
-                            $event['message']['type'] == 'image' or
-                            $event['message']['type'] == 'video' or
-                            $event['message']['type'] == 'audio' or
-                            $event['message']['type'] == 'file'
-                        ) {
-
-                            $contentURL =  $this->WEB_URL . "content/" . $event['message']['id'];
-                            $contentType = ucfirst($event['message']['type']);
-                            $this->bot->replyText(
-                                $event['replyToken'],
-                                $contentType . " yang Anda kirim bisa diakses dari link:\n " . $contentURL
-                            );
-                        }
+                        $result = $this->replySingleUser($event);
                     }
                 }
             }
+            $result = $this->response->setStatusCode($result->getHTTPStatus());
+            return $result;
+        } else {
+            return $result;
         }
-        // ----------------------------------------------------------------------------------------- //
     }
 
     public function getContent($message_id)
@@ -111,5 +67,60 @@ class Webhook extends Controller
             ->setContent($result->getRawBody())
             ->header('Content-Type', $result->getHeader('Content-Type'));
         return $response;
+    }
+
+    private function replySingleUser($event)
+    {
+        $result = $this->RESULT_DEFAULT_MESSAGE;
+        if ($event['message']['type'] == 'text') {
+            $greetings = $this->DEFAULT_GREETINGS;
+            if (strtolower($event['message']['text']) == 'flex message') {
+                $result = $this->replyFlexMessage($event);
+            } else {
+                $result = $this->bot->replyText($event['replyToken'], $greetings);
+            }
+        } elseif (
+            $event['message']['type'] == 'image' or
+            $event['message']['type'] == 'video' or
+            $event['message']['type'] == 'audio' or
+            $event['message']['type'] == 'file'
+        ) {
+            $contentURL =  $this->WEB_URL . "content/" . $event['message']['id'];
+            $contentType = ucfirst($event['message']['type']);
+            $result = $this->bot->replyText(
+                $event['replyToken'],
+                $contentType . " yang Anda kirim bisa diakses dari link:\n " . $contentURL
+            );
+        }
+        return $result;
+    }
+
+    private function replyGroupOrRoom($event)
+    {
+        $result = $this->RESULT_DEFAULT_MESSAGE;
+        if ($event['source']['userId']) {
+            $userId = $event['source']['userId'];
+            $getprofile = $this->bot->getProfile($userId);
+            $profile = $getprofile->getJSONDecodedBody();
+            $greetings = new TextMessageBuilder("Halo, " . $profile['displayName']);
+            $result = $this->bot->replyMessage($event['replyToken'], $greetings);
+        }
+        return $result;
+    }
+
+    private function replyFlexMessage($event ,$url = "")
+    {
+        $flexTemplate = file_get_contents(url('flex/flex-message.json'));
+        $result = $this->httpClient->post(LINEBot::DEFAULT_ENDPOINT_BASE . '/v2/bot/message/reply', [
+            'replyToken' => $event['replyToken'],
+            'messages'   => [
+                [
+                    'type'     => 'flex',
+                    'altText'  => 'Test Flex Message',
+                    'contents' => json_decode($flexTemplate)
+                ]
+            ],
+        ]);
+        return $result;
     }
 }
