@@ -25,3 +25,4 @@ $router->post('/webhook', 'Webhook@reply');
 $router->get('/content/{message_id}', 'Webhook@getContent');
 $router->get('/push', 'Webhook@pushMessage');
 $router->get('/broadcast', 'Webhook@pushMessageBroadcast');
+$router->get('/profile', 'Webhook@getProfile');

@@ -115,7 +115,19 @@ class Webhook extends Controller
 
         return $response;
     }
-    //* ------------------------------------------------------------------------------------------------------------------- *//
+
+    public function getProfile()
+    {
+        //! -----------------@Line Developers----------------- !//
+        $userId = 'Ub383312db4a3d9ec89d2afedbac32e24'; // My Account
+        //! -------------------------------------------------- !//
+        $result = $this->bot->getProfile($userId);
+        $response = $this->response
+            ->setContent(json_encode($result->getJSONDecodedBody()))
+            ->header('Content-Type', 'application/json')
+            ->setStatusCode($result->getHTTPStatus());
+    }
+    //* ----------------------------------------------------------------------------------------------------------- *//
 
 
     //* ----------------------------------------- PRIVATE METHOD ------------------------------------------------- *//
