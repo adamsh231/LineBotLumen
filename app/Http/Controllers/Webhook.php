@@ -33,10 +33,10 @@ class Webhook extends Controller
     // private $NEW_ARRIVAL = "[5694,5297,5336,5308,5188,4507,5015,4891,5063,5027,5122,5149]";   //update 18/11/2020
 
     private $COMMAND = array(
-                            "help"=>"!help",
-                            "new_arrival"=>"!new",
-                            "promo"=>"!promo"
-                        );
+        "help" => "!help",
+        "new_arrival" => "!new",
+        "promo" => "!promo"
+    );
 
     public function __construct(Request $request, Response $response)
     {
@@ -48,7 +48,9 @@ class Webhook extends Controller
         $this->data = $request->all();
 
         // ------------ Register If Not Registered ------------- //
-        $this->registerUser($this->data['events']);
+        foreach ($this->data['events'] as $event) {
+            $this->registerUser($event);
+        }
         // ----------------------------------------------------- //
     }
 
@@ -98,7 +100,7 @@ class Webhook extends Controller
         $greetings = $this->DEFAULT_GREETINGS;
         if ($event['message']['type'] == 'text') {
             if ($this->isCommand($event['message']['text'])) {
-                if($event['message']['text'] == $this->COMMAND['new_arrival']){
+                if ($event['message']['text'] == $this->COMMAND['new_arrival']) {
                     $result = $this->newArrival($event);
                 }
             } else {
@@ -115,7 +117,8 @@ class Webhook extends Controller
         return (($text[0] == '!') ? TRUE : FALSE);
     }
 
-    private function newArrival($event){
+    private function newArrival($event)
+    {
         $json = json_decode(file_get_contents(url('flex/new-arrival.json')), true);
         $product_new_arrival = $this->getProductNewArrival();
 
