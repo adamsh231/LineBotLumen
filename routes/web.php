@@ -23,3 +23,5 @@ $router->get('/key', function(){
 
 $router->post('/webhook', 'Webhook@reply');
 $router->get('/content/{message_id}', 'Webhook@getContent');
+
+$router->get('/json', 'Webhook@test');

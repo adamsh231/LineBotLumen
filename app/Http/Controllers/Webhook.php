@@ -41,6 +41,8 @@ class Webhook extends Controller
         $this->bot  = new LINEBot($this->httpClient, ['channelSecret' => getenv('CHANNEL_SECRET')]);
     }
 
+    //* ----------------------------------------- PUBLIC METHOD ------------------------------------------------- *//
+
     // TODO: Reply Sticker, More Messages or Images
     public function reply()
     {
@@ -71,6 +73,15 @@ class Webhook extends Controller
             ->header('Content-Type', $result->getHeader('Content-Type'));
         return $response;
     }
+
+    public function test(){
+        $json = file_get_contents(url('flex/flex-message.json'));
+        return json_decode($json, true);
+    }
+    //* ------------------------------------------------------------------------------------------------------------------- *//
+
+
+    //* ----------------------------------------- PRIVATE METHOD ------------------------------------------------- *//
 
     private function replySingleUser($event)
     {
@@ -113,7 +124,7 @@ class Webhook extends Controller
         return $result;
     }
 
-    private function replyFlexMessage($event ,$url = "")
+    private function replyFlexMessage($event ,$jsonURL = "")
     {
         $flexTemplate = file_get_contents(url('flex/flex-message.json'));
         $result = $this->httpClient->post(LINEBot::DEFAULT_ENDPOINT_BASE . '/v2/bot/message/reply', [
@@ -143,4 +154,6 @@ class Webhook extends Controller
         $display_name = $profile['displayName'];
         return $display_name;
     }
+
+    //* ------------------------------------------------------------------------------------------------------------------- *//
 }
