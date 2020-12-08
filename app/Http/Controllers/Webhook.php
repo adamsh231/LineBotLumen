@@ -27,6 +27,7 @@ class Webhook extends Controller
     private $response;
     private $httpClient;
 
+    private $FLEX_MESSAGE_CONTENT = json_decode(file_get_contents(url('flex/flex-message.json')), true);
     private $WEB_URL = "https://shoesmartlinebot.herokuapp.com/";
     private $RESULT_DEFAULT_MESSAGE = "Unknown Events!";
     private $DEFAULT_GREETINGS = "Assalamu'alaikum!";
@@ -76,16 +77,6 @@ class Webhook extends Controller
             ->header('Content-Type', $result->getHeader('Content-Type'));
         return $response;
     }
-
-    public function test(){
-        $json = json_decode(file_get_contents(url('flex/flex-message.json')), true);
-        $product_new_arrival = $this->getProductNewArrival();
-        foreach($product_new_arrival as $key => $value){
-            $json["contents"][$key] = $json["contents"][0];
-            $json["contents"][$key]["body"]["contents"][0]["text"] = $value["name"];
-        }
-        return $json;
-    }
     //* ------------------------------------------------------------------------------------------------------------------- *//
 
 
@@ -99,8 +90,8 @@ class Webhook extends Controller
         $result = $this->RESULT_DEFAULT_MESSAGE;
         if ($event['message']['type'] == 'text') {
             $greetings = $this->DEFAULT_GREETINGS;
-            if (strtolower($event['message']['text']) == 'flex message') {
-                $result = $this->replyFlexMessage($event);
+            if (strtolower($event['message']['text']) == 'new arrival') {
+                $result = $this->flexListNewArrival($event);
             } else {
                 $result = $this->bot->replyText($event['replyToken'], $greetings);
             }
@@ -132,7 +123,7 @@ class Webhook extends Controller
         return $result;
     }
 
-    private function replyFlexMessage($event ,$json)
+    private function replyFlexMessage($event, $json)
     {
         $result = $this->httpClient->post(LINEBot::DEFAULT_ENDPOINT_BASE . '/v2/bot/message/reply', [
             'replyToken' => $event['replyToken'],
@@ -147,14 +138,16 @@ class Webhook extends Controller
         return $result;
     }
 
-    private function registerUser($event){
+    private function registerUser($event)
+    {
         $data["line_id"] = $event['source']['userId'];
         $data["name"] = $this->getDisplayName($data["line_id"]);
         $user = (new User)->register($data);
         return $user;
     }
 
-    private function getDisplayName($line_id){
+    private function getDisplayName($line_id)
+    {
         $display_name = "";
         $getprofile = $this->bot->getProfile($line_id);
         $profile = $getprofile->getJSONDecodedBody();
@@ -162,11 +155,23 @@ class Webhook extends Controller
         return $display_name;
     }
 
-    private function getProductNewArrival(){
-        $api_new_arrival = $this->WEB_URL_API. "products?product_ids=". $this->NEW_ARRIVAL ."&_sort=name&_order=asc&_start=0&_end=15";
+    private function getProductNewArrival()
+    {
+        $api_new_arrival = $this->WEB_URL_API . "products?product_ids=" . $this->NEW_ARRIVAL . "&_sort=name&_order=asc&_start=0&_end=15";
         $product_new_arrival = $this->httpClient->get($api_new_arrival); //TODO: Line Library used -> Changed Facades soon !//
         $product_new_arrival = json_decode($product_new_arrival->getRawBody(), true);
         return $product_new_arrival;
+    }
+
+    private function flexListNewArrival($event)
+    {
+        $json = $this->FLEX_MESSAGE_CONTENT;
+        $product_new_arrival = $this->getProductNewArrival();
+        foreach ($product_new_arrival as $key => $value) {
+            $json["contents"][$key] = $json["contents"][0];
+            $json["contents"][$key]["body"]["contents"][0]["text"] = $value["name"];
+        }
+        return $this->replyFlexMessage($event, $json);
     }
 
     //* ------------------------------------------------------------------------------------------------------------------- *//
