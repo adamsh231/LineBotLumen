@@ -20,7 +20,7 @@
               "text": "Brown Cafe",
               "weight": "bold",
               "size": "md",
-              "wrap": true,
+              "wrap": false,
               "color": "#A88F00",
               "margin": "none"
             },
