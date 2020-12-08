@@ -27,7 +27,7 @@ class Webhook extends Controller
     private $WEB_URL = "https://shoesmartlinebot.herokuapp.com/";
     private $WEB_URL_OFFICIAL = "https://shoesmart.co.id/";
     private $RESULT_DEFAULT_MESSAGE = "Unknown Events!";
-    private $DEFAULT_GREETINGS = "Assalamu'alaikum!";
+    private $DEFAULT_GREETINGS = "Halo, Shoesmarter!";
     private $WEB_URL_API = "https://api.shoesmart.co.id/";
     private $NEW_ARRIVAL = "[5694,5297,5336,5308,5188,4507]";
     // private $NEW_ARRIVAL = "[5694,5297,5336,5308,5188,4507,5015,4891,5063,5027,5122,5149]";   //update 18/11/2020
