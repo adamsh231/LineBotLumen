@@ -96,6 +96,25 @@ class Webhook extends Controller
 
         return $response;
     }
+
+    public function pushMessageBroadcast()
+    {
+        //! -----------------@Line Developers----------------- !//
+        $userList = [
+            'Ub383312db4a3d9ec89d2afedbac32e24', // My Account
+            //! Apps can run if User Id is valid !//
+        ];
+        //! -------------------------------------------------- !//
+
+        $textMessageBuilder = new TextMessageBuilder('Halo, ini pesan multicast');
+        $result = $this->bot->multicast($userList, $textMessageBuilder);
+        $response = $this->response
+            ->setContent("Pesan push berhasil dikirim!")
+            ->header('Content-Type', 'application/json')
+            ->setStatusCode($result->getHTTPStatus());
+
+        return $response;
+    }
     //* ------------------------------------------------------------------------------------------------------------------- *//
 
 
