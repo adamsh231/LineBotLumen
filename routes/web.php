@@ -22,4 +22,4 @@ $router->get('/key', function(){
 });
 
 $router->post('/webhook', 'Webhook@index');
-$router->get('/content/{event_id}', 'Webhook@getContent');
+$router->get('/content/{message_id}', 'Webhook@getContent');

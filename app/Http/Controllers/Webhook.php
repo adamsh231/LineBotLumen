@@ -108,7 +108,7 @@ class Webhook extends Controller
         // ----------------------------------------------------------------------------------------- //
     }
 
-    public function getContent($event_id){
-        return $this->request->all();
+    public function getContent($message_id){
+        $this->bot->getMessageContent($message_id);
     }
 }
