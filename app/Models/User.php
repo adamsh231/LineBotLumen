@@ -15,6 +15,7 @@ class User extends Model implements AuthenticatableContract, AuthorizableContrac
 
     protected $table = 'user';
     protected $guarded = ['id'];
+    public $timestamps = false;
 
     public function link()
     {
