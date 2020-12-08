@@ -26,10 +26,13 @@ class Webhook extends Controller
     private $request;
     private $response;
     private $httpClient;
+
     private $WEB_URL = "https://shoesmartlinebot.herokuapp.com/";
     private $RESULT_DEFAULT_MESSAGE = "Unknown Events!";
     private $DEFAULT_GREETINGS = "Assalamu'alaikum!";
-
+    private $WEB_URL_API = "https://api.shoesmart.co.id/";
+    private $NEW_ARRIVAL = "[5694,5297,5336,5308,5188,4507]";
+    // private $NEW_ARRIVAL = "[5694,5297,5336,5308,5188,4507,5015,4891,5063,5027,5122,5149]";   //update 18/11/2020
 
     public function __construct(Request $request, Response $response)
     {
@@ -75,8 +78,13 @@ class Webhook extends Controller
     }
 
     public function test(){
-        $json = file_get_contents(url('flex/flex-message.json'));
-        return json_decode($json, true);
+        $json = json_decode(file_get_contents(url('flex/flex-message.json')), true);
+        $product_new_arrival = $this->getProductNewArrival();
+        foreach($product_new_arrival as $key => $value){
+            $json["contents"][$key] = $json["contents"][0];
+            $json["contents"][$key]["body"]["contents"][0]["text"] = $value["name"];
+        }
+        return $json;
     }
     //* ------------------------------------------------------------------------------------------------------------------- *//
 
@@ -124,16 +132,15 @@ class Webhook extends Controller
         return $result;
     }
 
-    private function replyFlexMessage($event ,$jsonURL = "")
+    private function replyFlexMessage($event ,$json)
     {
-        $flexTemplate = file_get_contents(url('flex/flex-message.json'));
         $result = $this->httpClient->post(LINEBot::DEFAULT_ENDPOINT_BASE . '/v2/bot/message/reply', [
             'replyToken' => $event['replyToken'],
             'messages'   => [
                 [
                     'type'     => 'flex',
                     'altText'  => 'Test Flex Message',
-                    'contents' => json_decode($flexTemplate)
+                    'contents' => $json
                 ]
             ],
         ]);
@@ -153,6 +160,13 @@ class Webhook extends Controller
         $profile = $getprofile->getJSONDecodedBody();
         $display_name = $profile['displayName'];
         return $display_name;
+    }
+
+    private function getProductNewArrival(){
+        $api_new_arrival = $this->WEB_URL_API. "products?product_ids=". $this->NEW_ARRIVAL ."&_sort=name&_order=asc&_start=0&_end=15";
+        $product_new_arrival = $this->httpClient->get($api_new_arrival); //TODO: Line Library used -> Changed Facades soon !//
+        $product_new_arrival = json_decode($product_new_arrival->getRawBody(), true);
+        return $product_new_arrival;
     }
 
     //* ------------------------------------------------------------------------------------------------------------------- *//
