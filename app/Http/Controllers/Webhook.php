@@ -17,6 +17,9 @@ use LINE\LINEBot\MessageBuilder\TemplateMessageBuilder;
 use LINE\LINEBot\MessageBuilder\TextMessageBuilder;
 use LINE\LINEBot\TemplateActionBuilder\MessageTemplateActionBuilder;
 
+use App\Models\User;
+use App\Models\Link;
+
 class Webhook extends Controller
 {
     private $bot;
@@ -71,6 +74,9 @@ class Webhook extends Controller
 
     private function replySingleUser($event)
     {
+        // ------------ Register If Not Registered ------------- //
+        $register = $this->registerUser($event);
+        // ----------------------------------------------------- //
         $result = $this->RESULT_DEFAULT_MESSAGE;
         if ($event['message']['type'] == 'text') {
             $greetings = $this->DEFAULT_GREETINGS;
@@ -100,9 +106,8 @@ class Webhook extends Controller
         $result = $this->RESULT_DEFAULT_MESSAGE;
         if ($event['source']['userId']) {
             $userId = $event['source']['userId'];
-            $getprofile = $this->bot->getProfile($userId);
-            $profile = $getprofile->getJSONDecodedBody();
-            $greetings = new TextMessageBuilder("Halo, " . $profile['displayName']);
+            $displayName = $this->getDisplayName($userId);
+            $greetings = new TextMessageBuilder("Halo, " . $displayName);
             $result = $this->bot->replyMessage($event['replyToken'], $greetings);
         }
         return $result;
@@ -122,5 +127,20 @@ class Webhook extends Controller
             ],
         ]);
         return $result;
+    }
+
+    private function registerUser($event){
+        $data["line_id"] = $event['source']['userId'];
+        $data["name"] = $this->getDisplayName($data["line_id"]);
+        $user = (new User)->register($data);
+        return $user;
+    }
+
+    private function getDisplayName($line_id){
+        $display_name = "";
+        $getprofile = $this->bot->getProfile($line_id);
+        $profile = $getprofile->getJSONDecodedBody();
+        $display_name = $profile['displayName'];
+        return $display_name;
     }
 }

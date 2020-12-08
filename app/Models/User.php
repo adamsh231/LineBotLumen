@@ -13,21 +13,23 @@ class User extends Model implements AuthenticatableContract, AuthorizableContrac
 {
     use Authenticatable, Authorizable, HasFactory;
 
-    /**
-     * The attributes that are mass assignable.
-     *
-     * @var array
-     */
-    protected $fillable = [
-        'name', 'email',
-    ];
+    protected $table = 'user';
+    protected $guarded = ['id'];
 
-    /**
-     * The attributes excluded from the model's JSON form.
-     *
-     * @var array
-     */
-    protected $hidden = [
-        'password',
-    ];
+    public function link()
+    {
+        return $this->hasMany('App\Models\Link');
+    }
+
+    public function register($data)
+    {
+        $user = User::firstOrCreate(
+            ['line_id' =>  $data["line_id"]],
+            [
+                'name' =>  $data["name"],
+                'line_id' => $data["line_id"]
+            ]
+        );
+        return $user;
+    }
 }
