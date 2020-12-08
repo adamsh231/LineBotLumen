@@ -110,6 +110,8 @@ class Webhook extends Controller
 
     public function getContent($message_id){
         $result = $this->bot->getMessageContent($message_id);
-        return $result;
+        // $this->response->setContent($result->getRawBody());
+        print("<pre>".print_r($result,true)."</pre>");
+        // return $this->response;
     }
 }
