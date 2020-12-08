@@ -55,8 +55,7 @@ class Webhook extends Controller
                             $getprofile = $this->bot->getProfile($userId);
                             $profile = $getprofile->getJSONDecodedBody();
                             $greetings = new TextMessageBuilder("Halo, " . $profile['displayName']);
-
-                            $result = $this->bot->replyMessage($event['replyToken'], $greetings); //* Result *//
+                            $this->bot->replyMessage($event['replyToken'], $greetings);
                         }
                     } else {
                         //! Message From Single User !//
@@ -65,11 +64,13 @@ class Webhook extends Controller
                             $text = "Assalamu'alaikum!";
 
                             if (strtolower($event['message']['text']) == 'user id') {
-                                $result = $this->bot->replyText($event['replyToken'], $event['source']['userId']);
+
+                                $this->bot->replyText($event['replyToken'], $text . ", ". $event['source']['userId']);
+
                             } elseif (strtolower($event['message']['text']) == 'flex message') {
 
-                                $flexTemplate = file_get_contents("../flex_message.json"); // template flex message
-                                $result = $this->httpClient->post(LINEBot::DEFAULT_ENDPOINT_BASE . '/v2/bot/message/reply', [
+                                $flexTemplate = file_get_contents(url('flex/flex-message.json')); // template flex message
+                                $this->httpClient->post(LINEBot::DEFAULT_ENDPOINT_BASE . '/v2/bot/message/reply', [
                                     'replyToken' => $event['replyToken'],
                                     'messages'   => [
                                         [
@@ -79,8 +80,11 @@ class Webhook extends Controller
                                         ]
                                     ],
                                 ]);
+
                             } else {
-                                $result = $this->bot->replyText($event['replyToken'], $text); //* Result *//
+
+                                $this->bot->replyText($event['replyToken'], $text);
+
                             }
                         } elseif (
                             $event['message']['type'] == 'image' or
@@ -88,17 +92,23 @@ class Webhook extends Controller
                             $event['message']['type'] == 'audio' or
                             $event['message']['type'] == 'file'
                         ) {
+
                             $contentURL =  $this->WEB_URL . "content/" . $event['message']['id'];
                             $contentType = ucfirst($event['message']['type']);
-                            $result = $this->bot->replyText(
+                            $this->bot->replyText(
                                 $event['replyToken'],
                                 $contentType . " yang Anda kirim bisa diakses dari link:\n " . $contentURL
-                            ); //* Result *//
+                            );
+
                         }
                     }
                 }
             }
         }
         // ----------------------------------------------------------------------------------------- //
+    }
+
+    public function getContent($event_id){
+        return $this->request->all();
     }
 }
