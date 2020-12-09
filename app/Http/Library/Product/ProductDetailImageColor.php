@@ -68,7 +68,7 @@ class ProductDetailImageColor
         $json["body"]["contents"][0]["contents"][1]["contents"][1]["url"] = !isset($variant_color["image_urls"][2]) ?  $no_images : $variant_color["image_urls"][2];
         $json["body"]["contents"][1]["contents"][0]["text"] = $color_name;
         $json["body"]["contents"][1]["contents"][0]["color"] = $color_rgb;
-        $json["footer"]["contents"][1]["action"]["url"] = $this->product->getWebUrlOfficial() . "product/" . $id . "/" . $index;
+        $json["footer"]["contents"][1]["action"]["uri"] = $this->product->getWebUrlOfficial() . "product/" . $id . "/" . $index;
 
         foreach ($variant_size as $key => $value) {
             $json["body"]["contents"][1]["contents"][2 + $key] = $json["body"]["contents"][1]["contents"][2];
