@@ -23,9 +23,9 @@ class Webhook extends Controller
     private $request;
     private $response;
     private $httpClient;
-    private $data;
-    private $user;
     private $command;
+    private $user;
+    private $data;
 
     private $WEB_URL_OFFICIAL = "https://shoesmart.co.id/";
     private $WEB_URL_API = "https://api.shoesmart.co.id/";
@@ -39,6 +39,7 @@ class Webhook extends Controller
         $this->request = $request;
         $this->response = $response;
         $this->user = $user;
+        $this->command = $command;
         $this->data = $request->all();
 
         // ------------ Register If Not Registered ------------- //
