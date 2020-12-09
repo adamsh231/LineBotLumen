@@ -4,7 +4,7 @@ namespace App\Http\Library;
 
 class Command
 {
-
+    //! Dont change Association key name, Will cause error in many classes !//
     private $COMMAND = array(
         "new_arrival" => "!new",
         "detail_image" => "!image",
