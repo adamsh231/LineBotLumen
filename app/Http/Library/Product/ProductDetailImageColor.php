@@ -58,7 +58,7 @@ class ProductDetailImageColor
         $variant_color = $api_product["variants"][$index];
         $color_name = $variant_color["color"]["name"];
         $product_name = $api_product["name"];
-        $no_images = url('images/no-preview.jpg');
+        $no_images = "https://perdamsi.or.id/theme/perdamsi/images/no-preview.jpg?dadead2ca4";
 
         $json["header"]["contents"][0]["text"] = $product_name;
         $json["body"]["contents"][0]["contents"][0]["url"] = !isset($variant_color["image_urls"][0]) ?  $no_images : $variant_color["image_urls"][0];

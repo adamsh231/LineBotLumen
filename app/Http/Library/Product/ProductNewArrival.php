@@ -61,7 +61,7 @@ class ProductNewArrival{
         $command_postback_image = $this->command->getCommand()['detail_image'];
         $json = json_decode(file_get_contents(url('template/new-arrival.json')), true);
         $api_product = $this->loadProduct();
-        $no_images = url('images/no-preview.jpg');
+        $no_images = "https://perdamsi.or.id/theme/perdamsi/images/no-preview.jpg?dadead2ca4";
         foreach ($api_product as $key => $value) {
             $json["contents"][$key] = $json["contents"][0];
             $json["contents"][$key]["hero"]["url"] = !isset($value["image_url"]) ?  $no_images : $value["image_url"];

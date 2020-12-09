@@ -59,13 +59,13 @@ class ProductDetailImage
         $variants = $api_product["variants"];
         $product_name = $api_product["name"];
         $product_id = $api_product["id"];
-        $no_images = url('images/no-preview.jpg');
+        $no_images = "https://perdamsi.or.id/theme/perdamsi/images/no-preview.jpg?dadead2ca4";
         foreach ($variants as $key => $value) {
             $json["columns"][$key] = $json["columns"][0];
             $json["columns"][$key]["imageUrl"] = !isset($value["image_urls"][0]) ? $no_images : $value["image_urls"][0];
             $json["columns"][$key]["action"]["label"] = $value["color"]["name"];
             $json["columns"][$key]["action"]["data"] = $command_postback_image_color . "=" . $key . "=" . $product_id;
-            $json["columns"][$key]["action"]["displayText"] = "Color: " . $value["color"]["name"] . " for ". $product_name . ", Checking Stock.." . $no_images;
+            $json["columns"][$key]["action"]["displayText"] = "Color: " . $value["color"]["name"] . " for ". $product_name . ", Checking Stock..";
         }
         return $json;
     }
