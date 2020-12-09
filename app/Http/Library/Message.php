@@ -20,7 +20,7 @@ class Message
 
     public function sendMoreMessage($event)
     {
-        $textMessageBuilder1 = new TextMessageBuilder('ini pesan balasan pertama');
+        $textMessageBuilder1 = new TextMessageBuilder('ini pesan balasan pertama 0x100090');
         $textMessageBuilder2 = new TextMessageBuilder('ini pesan balasan kedua');
         $stickerMessageBuilder = new StickerMessageBuilder(1, 106);
 
