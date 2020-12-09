@@ -48,16 +48,16 @@ class ProductNewArrival{
 
     private function loadProduct()
     {
-        $api_new_arrival = $this->product->getWebUrlApi() . "products?product_ids=" . $this->NEW_ARRIVAL . "&_sort=name&_order=asc&_start=0&_end=15";
-        $product_new_arrival = $this->httpClient->get($api_new_arrival);
-        $product_new_arrival = json_decode($product_new_arrival->getRawBody(), true);
-        return $product_new_arrival;
+        $api_product = $this->product->getWebUrlApi() . "products?product_ids=" . $this->NEW_ARRIVAL . "&_sort=name&_order=asc&_start=0&_end=15";
+        $api_product = $this->httpClient->get($api_product);
+        $api_product = json_decode($api_product->getRawBody(), true);
+        return $api_product;
     }
 
     private function templateNewArrival(){
         $json = json_decode(file_get_contents(url('template/new-arrival.json')), true);
-        $product_new_arrival = $this->loadProduct();
-        foreach ($product_new_arrival as $key => $value) {
+        $api_product = $this->loadProduct();
+        foreach ($api_product as $key => $value) {
             $json["contents"][$key] = $json["contents"][0];
             $json["contents"][$key]["hero"]["url"] = $value["image_url"];
             $json["contents"][$key]["body"]["contents"][0]["text"] = $value["name"];

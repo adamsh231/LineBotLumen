@@ -38,8 +38,23 @@ class ProductDetailImage{
 
     //* --------------------------------------- MODIFIER PRIVATE PROPERTY ---------------------------------------------- *//
 
+    private function loadProduct($id = 2276)
+    {
+        $api_product = $this->product->getWebUrlApi() . "products/" . $id;
+        $api_product = $this->httpClient->get($api_product);
+        $api_product = json_decode($api_product->getRawBody(), true);
+        return $api_product;
+    }
+
     private function templateProductDetail(){
         $json = json_decode(file_get_contents(url('template/detail-image.json')), true);
+        $api_product = $this->loadProduct();
+        $variants = $api_product["variants"];
+        foreach ($variants as $key => $value) {
+            $json["columns"][$key] = $json["columns"][0];
+            $json["columns"][$key]["imageUrl"] = $value["image_urls"][0];
+            $json["columns"][$key]["action"]["text"] = $value["image_urls"]["color"]["name"];
+        }
         return $json;
     }
 
