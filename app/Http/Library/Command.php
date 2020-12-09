@@ -31,7 +31,7 @@ class Command
         $splitter = explode("=", $text);
         $split["command"] = $splitter[0];
         $split["data"] = $splitter[1];
-        foreach($splitter as $key => $value){
+        foreach ($splitter as $key => $value) {
             $split[$key] = $value;
         }
         return $split;
