@@ -61,9 +61,9 @@ class ProductDetailImageColor
         $no_images = url('images/no-preview.jpg');
 
         $json["header"]["contents"][0]["text"] = $product_name;
-        $json["body"]["contents"][0]["contents"][0]["url"] = $variant_color["image_urls"][0] ? $variant_color["image_urls"][0] : $no_images;
-        $json["body"]["contents"][0]["contents"][1]["contents"][0]["url"] = $variant_color["image_urls"][1] ? $variant_color["image_urls"][1] : $no_images;
-        $json["body"]["contents"][0]["contents"][1]["contents"][1]["url"] = $variant_color["image_urls"][2] ? $variant_color["image_urls"][2] : $no_images;
+        $json["body"]["contents"][0]["contents"][0]["url"] = is_null($variant_color["image_urls"][0]) ? $variant_color["image_urls"][0] : $no_images;
+        $json["body"]["contents"][0]["contents"][1]["contents"][0]["url"] = is_null($variant_color["image_urls"][1]) ? $variant_color["image_urls"][1] : $no_images;
+        $json["body"]["contents"][0]["contents"][1]["contents"][1]["url"] = is_null($variant_color["image_urls"][2]) ? $variant_color["image_urls"][2] : $no_images;
         $json["body"]["contents"][1]["contents"][0]["text"] = $color_name;
 
         //TODO: Lancrotkan Foreach

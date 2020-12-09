@@ -64,7 +64,7 @@ class ProductNewArrival{
         $no_images = url('images/no-preview.jpg');
         foreach ($api_product as $key => $value) {
             $json["contents"][$key] = $json["contents"][0];
-            $json["contents"][$key]["hero"]["url"] = $value["image_url"] ? $value["image_url"] : $no_images;
+            $json["contents"][$key]["hero"]["url"] = is_null($value["image_url"]) ? $value["image_url"] : $no_images;
             $json["contents"][$key]["hero"]["action"]["data"] = $command_postback_image ."=". $value["id"];
             $json["contents"][$key]["hero"]["action"]["displayText"] = "Color List: ".$value["name"];
             $json["contents"][$key]["body"]["contents"][0]["text"] = $value["name"];
