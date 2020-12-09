@@ -8,6 +8,7 @@ class Command
     private $COMMAND = array(
         "new_arrival" => "!new",
         "help" => "!help",
+        "info" => "!info",
 
         // ---- Only Postback ----- //
         "detail_image" => "!image",
