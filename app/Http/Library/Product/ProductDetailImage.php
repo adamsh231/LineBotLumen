@@ -53,7 +53,7 @@ class ProductDetailImage{
         foreach ($variants as $key => $value) {
             $json["columns"][$key] = $json["columns"][0];
             $json["columns"][$key]["imageUrl"] = $value["image_urls"][0];
-            $json["columns"][$key]["action"]["text"] = $value["image_urls"]["color"]["name"];
+            $json["columns"][$key]["action"]["text"] = $value["color"]["name"];
         }
         return $json;
     }
