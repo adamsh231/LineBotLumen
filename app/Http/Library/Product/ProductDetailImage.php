@@ -53,7 +53,7 @@ class ProductDetailImage
 
     private function templateProductDetail($id)
     {
-        // $command_postback_image_color = $this->command->getCommand()['detail_image'];
+        $command_postback_image_color = $this->command->getCommand()['detail_image'];
         $json = json_decode(file_get_contents(url('template/detail-image.json')), true);
         $api_product = $this->loadProduct($id);
         $variants = $api_product["variants"];
@@ -61,8 +61,7 @@ class ProductDetailImage
         foreach ($variants as $key => $value) {
             $json["columns"][$key] = $json["columns"][0];
             $json["columns"][$key]["imageUrl"] = $value["image_urls"][0];
-            // $json["columns"][$key]["action"]["data"] = $command_postback_image_color . "=" . $value["id"];
-            $json["columns"][$key]["action"]["data"] = "ss";
+            $json["columns"][$key]["action"]["data"] = $command_postback_image_color . "=" . $value["id"];
             $json["columns"][$key]["action"]["displayText"] = "Color: " . $value["color"]["name"] . " for ". $product_name . ", Checking Stock..";
         }
         return $json;
