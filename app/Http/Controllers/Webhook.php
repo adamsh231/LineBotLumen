@@ -128,8 +128,6 @@ class Webhook extends Controller
             $json["contents"][$key]["footer"]["action"]["uri"] = $this->WEB_URL_OFFICIAL . "product/" . $value["id"] . "/0";
         }
 
-        $this->bot->replyText($event['replyToken'], "Check New Arrival Product, Please Wait..");
-
         $this->httpClient->post(LINEBot::DEFAULT_ENDPOINT_BASE . '/v2/bot/message/reply', [
             'replyToken' => $event['replyToken'],
             'messages'   => [
