@@ -39,7 +39,7 @@ class ProductDetailImage{
     //* --------------------------------------- MODIFIER PRIVATE PROPERTY ---------------------------------------------- *//
 
     private function templateProductDetail(){
-        $json = json_decode(file_get_contents(url('template/new-arrival.json')), true);
+        $json = json_decode(file_get_contents(url('template/detail-image.json')), true);
         return $json;
     }
 
