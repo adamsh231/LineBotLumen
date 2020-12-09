@@ -97,31 +97,34 @@
               "spacing": "none",
               "margin": "xxl",
               "paddingBottom": "lg"
-            },
-            {
-              "type": "separator"
-            },
-            {
-              "type": "text",
-              "text": "View",
-              "contents": [],
-              "align": "center",
-              "margin": "md",
-              "size": "sm",
-              "color": "#808080",
-              "weight": "regular",
-              "action": {
-                "type": "uri",
-                "label": "action",
-                "uri": "http://linecorp.com/"
-              }
-            },
-            {
-              "type": "spacer"
             }
           ]
         }
       ],
       "paddingAll": "0px"
+    },
+    "footer": {
+      "type": "box",
+      "layout": "vertical",
+      "contents": [
+        {
+          "type": "separator"
+        },
+        {
+          "type": "text",
+          "text": "View",
+          "contents": [],
+          "align": "center",
+          "margin": "md",
+          "size": "sm",
+          "color": "#808080",
+          "weight": "regular",
+          "action": {
+            "type": "uri",
+            "label": "action",
+            "uri": "http://linecorp.com/"
+          }
+        }
+      ]
     }
   }

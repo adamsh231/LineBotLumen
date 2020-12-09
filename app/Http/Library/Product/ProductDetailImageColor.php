@@ -70,8 +70,7 @@ class ProductDetailImageColor
         $json["body"]["contents"][1]["contents"][0]["color"] = $color_rgb;
 
         foreach ($variant_size as $key => $value) {
-            $json["body"]["contents"][1]["contents"][2]["contents"][0 + $key] = $json["body"]["contents"][1]["contents"][2]["contents"][0];
-            $json["body"]["contents"][1]["contents"][2]["contents"][1 + $key] = $json["body"]["contents"][1]["contents"][2]["contents"][1];
+            $json["body"]["contents"][1]["contents"][2 + $key] = $json["body"]["contents"][1]["contents"][2];
 
             // $json["body"]["contents"][1]["contents"][2]["contents"][0 + $key]["text"] = $value["size"];
             // $json["body"]["contents"][1]["contents"][2]["contents"][1 + $key]["text"] = $value["stock"];
