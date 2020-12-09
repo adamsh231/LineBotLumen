@@ -23,6 +23,7 @@ class Webhook extends Controller
     private $response;
     private $httpClient;
     private $data;
+    private $user;
 
     private $WEB_URL = "https://shoesmartlinebot.herokuapp.com/";
     private $WEB_URL_OFFICIAL = "https://shoesmart.co.id/";
@@ -37,13 +38,14 @@ class Webhook extends Controller
         "promo" => "!promo"
     );
 
-    public function __construct(Request $request, Response $response)
+    public function __construct(Request $request, Response $response, User $user)
     {
         $this->httpClient = new CurlHTTPClient(getenv('CHANNEL_ACCESS_TOKEN'));
         $this->bot  = new LINEBot($this->httpClient, ['channelSecret' => getenv('CHANNEL_SECRET')]);
 
         $this->request = $request;
         $this->response = $response;
+        $this->user = $user;
         $this->data = $request->all();
 
         // ------------ Register If Not Registered ------------- //
@@ -84,7 +86,7 @@ class Webhook extends Controller
     {
         $data["line_id"] = $event['source']['userId'];
         $data["name"] = $this->getDisplayName($data["line_id"]);
-        (new User)->register($data);
+        $this->user->register($data);
     }
 
     private function replyMessage($event)
