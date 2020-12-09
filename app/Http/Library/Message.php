@@ -25,7 +25,7 @@ class Message
         $emoticon =  mb_convert_encoding($bin, 'UTF-8', 'UTF-32BE');
 
         $text = "ini pesan
-         pertama";
+                pertama";
 
         $textMessageBuilder1 = new TextMessageBuilder($text. $emoticon);
         $textMessageBuilder2 = new TextMessageBuilder('ini pesan balasan kedua');
