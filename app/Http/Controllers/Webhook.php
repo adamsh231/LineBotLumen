@@ -6,15 +6,10 @@ use Illuminate\Http\Request;
 use Illuminate\Http\Response;
 use LINE\LINEBot;
 use LINE\LINEBot\HTTPClient\CurlHTTPClient;
-use LINE\LINEBot\MessageBuilder\MultiMessageBuilder;
-use LINE\LINEBot\MessageBuilder\StickerMessageBuilder;
-use LINE\LINEBot\MessageBuilder\TemplateBuilder\ButtonTemplateBuilder;
-use LINE\LINEBot\MessageBuilder\TemplateMessageBuilder;
-use LINE\LINEBot\MessageBuilder\TextMessageBuilder;
-use LINE\LINEBot\TemplateActionBuilder\MessageTemplateActionBuilder;
 
 use App\Http\Library\User;
 use App\Http\Library\Command;
+use App\Http\Library\Message;
 use App\Http\Library\Product\ProductNewArrival;
 use App\Http\Library\Product\ProductDetailImage;
 use App\Http\Library\Product\ProductDetailImageColor;
@@ -76,6 +71,7 @@ class Webhook extends Controller
                 }
             } else {
                 //TODO: reply user if not command
+                (new Message)->sendMoreMessage($event);
             }
         } else {
             //TODO: reply user if not text message
