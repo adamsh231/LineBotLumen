@@ -14,7 +14,8 @@
           "action": {
             "type": "postback",
             "label": "action",
-            "data": "hello"
+            "data": "hello",
+            "displayText": "Product Name"
           }
         },
         "body": {

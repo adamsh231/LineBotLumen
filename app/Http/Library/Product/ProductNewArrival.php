@@ -66,6 +66,7 @@ class ProductNewArrival{
             $json["contents"][$key] = $json["contents"][0];
             $json["contents"][$key]["hero"]["url"] = $value["image_url"];
             $json["contents"][$key]["hero"]["action"]["data"] = $command_postback_image ."=". $value["id"];
+            $json["contents"][$key]["hero"]["action"]["displayText"] = "Color List: ".$value["name"];
             $json["contents"][$key]["body"]["contents"][0]["text"] = $value["name"];
             $json["contents"][$key]["body"]["contents"][1]["contents"][0]["contents"][0]["text"] = $value["brand_name"];
 
