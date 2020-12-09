@@ -57,9 +57,9 @@ class ProductDetailImageColor{
         $product_name = $api_product["name"];
 
         $json["header"]["contents"][0]["text"] = $product_name;
-        $json["body"]["contents"][0]["contents"][0]["url"] = $variant_color["image_urls"][0];
-        $json["body"]["contents"][0]["contents"][1]["contents"][0]["url"] = $variant_color["image_urls"][1];
-        $json["body"]["contents"][0]["contents"][1]["contents"][1]["url"] = $variant_color["image_urls"][2];
+        // $json["body"]["contents"][0]["contents"][0]["url"] = $variant_color["image_urls"][0];
+        // $json["body"]["contents"][0]["contents"][1]["contents"][0]["url"] = $variant_color["image_urls"][1];
+        // $json["body"]["contents"][0]["contents"][1]["contents"][1]["url"] = $variant_color["image_urls"][2];
         $json["body"]["contents"][1]["contents"][0]["text"] = $color_name;
 
         //TODO: Lancrotkan Foreach
