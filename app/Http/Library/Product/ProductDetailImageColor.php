@@ -73,7 +73,13 @@ class ProductDetailImageColor
             $json["body"]["contents"][1]["contents"][2 + $key] = $json["body"]["contents"][1]["contents"][2];
 
             $json["body"]["contents"][1]["contents"][2 + $key]["contents"][0]["text"] = strval($value["size"]);
-            $json["body"]["contents"][1]["contents"][2 + $key]["contents"][1]["text"] = strval($value["stock"]);
+
+            if($value["stock"] == 0){
+                $json["body"]["contents"][1]["contents"][2 + $key]["contents"][1]["text"] = "Out of Stock!";
+            }else{
+                $json["body"]["contents"][1]["contents"][2 + $key]["contents"][1]["text"] = strval($value["stock"]) . " Avaible Stock";
+                $json["body"]["contents"][1]["contents"][2 + $key]["contents"][1]["color"] = "#8c8c8c";
+            }
         }
 
         //TODO: Lancrotkan Foreach

@@ -12,7 +12,11 @@
           "margin": "none",
           "weight": "bold",
           "color": "#A88F00",
-          "wrap": true
+          "wrap": true,
+          "size": "lg"
+        },
+        {
+          "type": "separator"
         }
       ],
       "paddingAll": "md"
@@ -68,9 +72,10 @@
               "text": "Color",
               "align": "center",
               "margin": "md",
-              "weight": "bold",
+              "weight": "regular",
               "color": "#A88F00",
-              "wrap": true
+              "wrap": true,
+              "size": "lg"
             },
             {
               "type": "separator",
@@ -95,8 +100,8 @@
                 }
               ],
               "spacing": "none",
-              "margin": "xxl",
-              "paddingBottom": "lg"
+              "margin": "md",
+              "paddingBottom": "none"
             }
           ]
         }
