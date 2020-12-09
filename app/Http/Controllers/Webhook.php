@@ -10,6 +10,7 @@ use LINE\LINEBot\HTTPClient\CurlHTTPClient;
 use App\Http\Library\User;
 use App\Http\Library\Command;
 use App\Http\Library\Message;
+use App\Http\Library\Text;
 use App\Http\Library\Product\ProductNewArrival;
 use App\Http\Library\Product\ProductDetailImage;
 use App\Http\Library\Product\ProductDetailImageColor;
@@ -71,7 +72,7 @@ class Webhook extends Controller
                 }
             } else {
                 //TODO: reply user if not command
-                (new Message)->sendMoreMessage($event);
+                (new Message)->sendMessage($event, (new Text)->getFalseCommand());
             }
         } else {
             //TODO: reply user if not text message

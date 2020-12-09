@@ -31,11 +31,11 @@ class Text
 
     private function setHelpCommand()
     {
-        $help = "Command List \n
-                '!help' : Melihat list command \n
-                '!info' : Informasi Tentang Shoesmart\n
-                '!new'  : Menampilkan Produk New Arrival\n
-                '!promo': Menampilkan Promo Terbaru";
+        $help = "Command List". PHP_EOL
+                ."'!help' : Melihat list command". PHP_EOL
+                ."'!info' : Informasi Tentang Shoesmart". PHP_EOL
+                ."'!new'  : Menampilkan Produk New Arrival". PHP_EOL
+                ."'!promo': Menampilkan Promo Terbaru";
         $this->help_command[0] = array("type" => "text", "text" => $help);
     }
 

@@ -18,26 +18,30 @@ class Message
 
     //* --------------------------------------- MODIFIER PUBLIC PROPERTY ----------------------------------------------- *//
 
-    public function sendMoreMessage($event)
+    public function sendMessage($event, $arr_text)
     {
-        $code = '10008B';
+        $messageBuilder = [];
+        $multiMessageBuilder = new MultiMessageBuilder();
+        foreach($arr_text as $key => $value){
+            if($value["type"] == "text"){
+                $messageBuilder[$key] = new TextMessageBuilder($value["text"]);
+            }else{
+                //TODO: Define Soon!
+            }
+            $multiMessageBuilder->add($messageBuilder[$key]);
+        }
+        $this->bot->replyMessage($event["replyToken"], $multiMessageBuilder);
+    }
+
+    //* ---------------------------------------------------------------------------------------------------------------- *//
+
+    //* --------------------------------------- MODIFIER PUBLIC PROPERTY ----------------------------------------------- *//
+
+    private function decodeEmoji($emoji){
+        $code = str_replace('0x', '', $emoji);
         $bin = hex2bin(str_repeat('0', 8 - strlen($code)) . $code);
         $emoticon =  mb_convert_encoding($bin, 'UTF-8', 'UTF-32BE');
-
-        $text = "ini pesan".PHP_EOL."pertama";
-
-        $textMessageBuilder1 = new TextMessageBuilder($text. $emoticon);
-        $textMessageBuilder2 = new TextMessageBuilder('ini pesan balasan kedua');
-        $stickerMessageBuilder = new StickerMessageBuilder(1, 106);
-
-
-        $multiMessageBuilder = new MultiMessageBuilder();
-        $multiMessageBuilder->add($textMessageBuilder1);
-        $multiMessageBuilder->add($textMessageBuilder2);
-        $multiMessageBuilder->add($stickerMessageBuilder);
-
-
-        $this->bot->replyMessage($event["replyToken"], $multiMessageBuilder);
+        return $emoticon;
     }
 
     //* ---------------------------------------------------------------------------------------------------------------- *//
