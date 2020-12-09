@@ -25,18 +25,13 @@ class Webhook extends Controller
     private $httpClient;
     private $data;
     private $user;
+    private $command;
 
     private $WEB_URL_OFFICIAL = "https://shoesmart.co.id/";
     private $WEB_URL_API = "https://api.shoesmart.co.id/";
     private $NEW_ARRIVAL = "[5694,5297,5336,5308,5188,4507,5015,4891,5063,5027]";
 
-    private $COMMAND = array(
-        "help" => "!help",
-        "new_arrival" => "!new",
-        "promo" => "!promo"
-    );
-
-    public function __construct(Request $request, Response $response, User $user)
+    public function __construct(Request $request, Response $response, User $user, Command $command)
     {
         $this->httpClient = new CurlHTTPClient(getenv('CHANNEL_ACCESS_TOKEN'));
         $this->bot  = new LINEBot($this->httpClient, ['channelSecret' => getenv('CHANNEL_SECRET')]);
@@ -72,8 +67,8 @@ class Webhook extends Controller
     private function replyMessage($event)
     {
         if ($event['message']['type'] == 'text') {
-            if ((new Command)->isCommand($event['message']['text'])) {
-                if ($event['message']['text'] == $this->COMMAND['new_arrival']) {
+            if ($this->command->isCommand($event['message']['text'])) {
+                if ($event['message']['text'] == $this->command->getCommand()['new_arrival']) {
                     $this->newArrival($event);
                 }
             } else {
