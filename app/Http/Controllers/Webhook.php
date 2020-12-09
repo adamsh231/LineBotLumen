@@ -118,10 +118,9 @@ class Webhook extends Controller
             $json["contents"][$key]["body"]["contents"][0]["text"] = $value["name"];
             $json["contents"][$key]["body"]["contents"][1]["contents"][0]["contents"][0]["text"] = $value["brand_name"];
 
-            if ($value['final_price'] != intval($value['price'])) {
+            if ($value['final_price'] != $value['price']) {
                 $json["contents"][$key]["body"]["contents"][2]["text"] = "Rp " . number_format($value["price"], 0, ",", ".");
-            } else {
-                $json["contents"][$key]["body"]["contents"][2]["color"] = "#FFFFFF";
+                $json["contents"][$key]["body"]["contents"][2]["color"] = "#8c8c8c";
             }
 
             $json["contents"][$key]["body"]["contents"][3]["text"] = "Rp " . number_format($value["final_price"], 0, ",", ".");
