@@ -72,8 +72,9 @@ class ProductDetailImageColor
         foreach ($variant_size as $key => $value) {
             $json["body"]["contents"][1]["contents"][2 + $key] = $json["body"]["contents"][1]["contents"][2];
 
-            $json["body"]["contents"][1]["contents"][2 + $key]["contents"][0]["text"] = $value["size"];
-            $json["body"]["contents"][1]["contents"][2 + $key]["contents"][1]["text"] = $value["stock"];
+            $json["body"]["contents"][1]["contents"][2 + $key]["contents"][0]["text"] = "SOnn";
+            // $json["body"]["contents"][1]["contents"][2 + $key]["contents"][0]["text"] = $value["size"];
+            // $json["body"]["contents"][1]["contents"][2 + $key]["contents"][1]["text"] = $value["stock"];
         }
 
         //TODO: Lancrotkan Foreach
