@@ -13,8 +13,8 @@ use LINE\LINEBot\MessageBuilder\TemplateMessageBuilder;
 use LINE\LINEBot\MessageBuilder\TextMessageBuilder;
 use LINE\LINEBot\TemplateActionBuilder\MessageTemplateActionBuilder;
 
-use App\Models\User;
-use App\Models\Link;
+use App\Http\Library\User;
+
 
 class Webhook extends Controller
 {
@@ -23,6 +23,7 @@ class Webhook extends Controller
     private $response;
     private $httpClient;
     private $data;
+
     private $user;
 
     private $WEB_URL = "https://shoesmartlinebot.herokuapp.com/";
@@ -49,9 +50,7 @@ class Webhook extends Controller
         $this->data = $request->all();
 
         // ------------ Register If Not Registered ------------- //
-        foreach ($this->data['events'] as $event) {
-            $this->registerUser($event);
-        }
+            $this->user->registerUser($this->data['events'][0]);
         // ----------------------------------------------------- //
     }
 
@@ -73,22 +72,6 @@ class Webhook extends Controller
 
 
     //* ----------------------------------------- PRIVATE METHOD ------------------------------------------------- *//
-    private function getDisplayName($line_id)
-    {
-        $display_name = "";
-        $getprofile = $this->bot->getProfile($line_id);
-        $profile = $getprofile->getJSONDecodedBody();
-        $display_name = $profile['displayName'];
-        return $display_name;
-    }
-
-    private function registerUser($event)
-    {
-        $data["line_id"] = $event['source']['userId'];
-        $data["name"] = $this->getDisplayName($data["line_id"]);
-        $this->user->register($data);
-    }
-
     private function replyMessage($event)
     {
         if ($event['message']['type'] == 'text') {
