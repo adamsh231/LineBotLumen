@@ -38,7 +38,7 @@ class ProductNewArrival{
             'messages'   => [
                 [
                     'type'     => 'flex',
-                    'altText'  => 'New Arrival Flex Message',
+                    'altText'  => 'New Arrival Product',
                     'contents' => $json
                 ]
             ],
@@ -59,7 +59,6 @@ class ProductNewArrival{
 
     private function templateNewArrival(){
         $command_postback_image = $this->command->getCommand()['detail_image'];
-
         $json = json_decode(file_get_contents(url('template/new-arrival.json')), true);
         $api_product = $this->loadProduct();
         foreach ($api_product as $key => $value) {

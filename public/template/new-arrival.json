@@ -75,12 +75,7 @@
             }
           ],
           "spacing": "sm",
-          "paddingAll": "13px",
-          "action": {
-            "type": "message",
-            "label": "action",
-            "text": "Tulisan"
-          }
+          "paddingAll": "13px"
         },
         "footer": {
           "type": "box",

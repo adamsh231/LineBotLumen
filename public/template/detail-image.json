@@ -4,9 +4,10 @@
         {
           "imageUrl": "https://example.com/bot/images/item2.jpg",
           "action": {
-            "type": "message",
-            "label": "Color",
-            "text": "yes"
+            "type": "postback",
+            "label": "action",
+            "data": "hello",
+            "displayText": "Product Name"
           }
         }
     ]

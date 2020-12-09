@@ -17,6 +17,7 @@ use App\Http\Library\User;
 use App\Http\Library\Command;
 use App\Http\Library\Product\ProductNewArrival;
 use App\Http\Library\Product\ProductDetailImage;
+use App\Http\Library\Product\ProductDetailImageColor;
 
 class Webhook extends Controller
 {
@@ -86,6 +87,8 @@ class Webhook extends Controller
         $event_command = $this->command->splitCommand($event['postback']['data']);
         if($event_command['command'] == $command['detail_image']){
             (new ProductDetailImage)->loadTemplate($event, $event_command['data']);
+        }else if($event_command['command'] == $command['detail_image_color']){
+            (new ProductDetailImageColor)->loadTemplate($event, $event_command['data']);
         }
     }
     //* ---------------------------------------------------------------------------------------------------------- *//

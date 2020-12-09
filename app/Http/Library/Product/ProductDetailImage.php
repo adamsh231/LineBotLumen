@@ -6,10 +6,13 @@ use LINE\LINEBot;
 use LINE\LINEBot\HTTPClient\CurlHTTPClient;
 
 use App\Http\Library\Product\Product;
+use App\Http\Library\Command;
 
-class ProductDetailImage{
+class ProductDetailImage
+{
 
     private $product;
+    private $command;
 
     public function __construct()
     {
@@ -17,10 +20,12 @@ class ProductDetailImage{
         $this->bot  = new LINEBot($this->httpClient, ['channelSecret' => getenv('CHANNEL_SECRET')]);
 
         $this->product = new Product;
+        $this->command = new Command;
     }
 
     //* --------------------------------------- MODIFIER PUBLIC PROPERTY ----------------------------------------------- *//
-    public function loadTemplate($event, $id){
+    public function loadTemplate($event, $id)
+    {
         $json = $this->templateProductDetail($id);
 
         $this->httpClient->post(LINEBot::DEFAULT_ENDPOINT_BASE . '/v2/bot/message/reply', [
@@ -28,7 +33,7 @@ class ProductDetailImage{
             'messages'   => [
                 [
                     'type'     => 'template',
-                    'altText'  => 'Product Detail Image Carousel',
+                    'altText'  => 'Product Detail',
                     'template' => $json
                 ]
             ],
@@ -38,7 +43,7 @@ class ProductDetailImage{
 
     //* --------------------------------------- MODIFIER PRIVATE PROPERTY ---------------------------------------------- *//
 
-    private function loadProduct($id)
+    protected function loadProduct($id)
     {
         $api_product = $this->product->getWebUrlApi() . "products/" . $id;
         $api_product = $this->httpClient->get($api_product);
@@ -46,14 +51,18 @@ class ProductDetailImage{
         return $api_product;
     }
 
-    private function templateProductDetail($id){
+    private function templateProductDetail($id)
+    {
+        $command_postback_image_color = $this->command->getCommand()['detail_image'];
         $json = json_decode(file_get_contents(url('template/detail-image.json')), true);
         $api_product = $this->loadProduct($id);
         $variants = $api_product["variants"];
+        $product_name = $api_product["name"];
         foreach ($variants as $key => $value) {
             $json["columns"][$key] = $json["columns"][0];
             $json["columns"][$key]["imageUrl"] = $value["image_urls"][0];
-            $json["columns"][$key]["action"]["label"] = $value["color"]["name"];
+            $json["columns"][$key]["action"]["data"] = $command_postback_image_color . "=" . $value["id"];
+            $json["columns"][$key]["action"]["displayText"] = "Checking Stock ". $product_name .", Color: " . $value["color"]["name"];
         }
         return $json;
     }

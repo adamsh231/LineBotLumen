@@ -4,10 +4,14 @@ namespace App\Http\Library;
 
 class Command
 {
-    //! Dont change Association key name, Will cause error in many classes !//
+    //! Do not change Association key name, Will cause error in many classes !//
     private $COMMAND = array(
         "new_arrival" => "!new",
+
+        // ---- Postback ----- //
         "detail_image" => "!image",
+        "detail_image_color" => "!image_color",
+        // ------------------- //
     );
 
     public function getCommand()
