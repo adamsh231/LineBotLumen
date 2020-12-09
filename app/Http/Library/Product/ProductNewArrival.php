@@ -6,7 +6,7 @@ use LINE\LINEBot;
 use LINE\LINEBot\HTTPClient\CurlHTTPClient;
 
 use App\Http\Library\Product\Product;
-use App\Http\Library\Product\Command;
+use App\Http\Library\Command;
 
 class ProductNewArrival{
 
