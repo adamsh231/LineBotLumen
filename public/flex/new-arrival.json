@@ -89,8 +89,8 @@
               "text": "View",
               "contents": [],
               "align": "center",
-              "margin": "xs",
-              "size": "xs",
+              "margin": "md",
+              "size": "sm",
               "color": "#808080",
               "weight": "regular"
             }
@@ -99,7 +99,7 @@
           "alignItems": "center",
           "spacing": "none",
           "paddingTop": "sm",
-          "paddingBottom": "sm",
+          "paddingBottom": "md",
           "action": {
             "type": "uri",
             "label": "action",
