@@ -10,7 +10,12 @@
           "url": "https://scdn.line-apps.com/n/channel_devcenter/img/flexsnapshot/clip/clip10.jpg",
           "size": "full",
           "aspectMode": "cover",
-          "aspectRatio": "170:210"
+          "aspectRatio": "170:210",
+          "action": {
+            "type": "message",
+            "label": "action",
+            "text": "Gambar"
+          }
         },
         "body": {
           "type": "box",
@@ -73,7 +78,7 @@
           "action": {
             "type": "message",
             "label": "action",
-            "text": "hello"
+            "text": "Tulisan"
           }
         },
         "footer": {
