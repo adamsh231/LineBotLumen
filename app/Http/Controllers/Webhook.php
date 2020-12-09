@@ -88,7 +88,7 @@ class Webhook extends Controller
         if($event_command['command'] == $command['detail_image']){
             (new ProductDetailImage)->loadTemplate($event, $event_command['data']);
         }else if($event_command['command'] == $command['detail_image_color']){
-            (new ProductDetailImageColor)->loadTemplate($event, $event_command['data']);
+            (new ProductDetailImageColor($event_command[2]))->loadTemplate($event, $event_command['data']);
         }
     }
     //* ---------------------------------------------------------------------------------------------------------- *//

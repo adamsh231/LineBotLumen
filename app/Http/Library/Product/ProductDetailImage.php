@@ -58,11 +58,12 @@ class ProductDetailImage
         $api_product = $this->loadProduct($id);
         $variants = $api_product["variants"];
         $product_name = $api_product["name"];
+        $product_id = $api_product["id"];
         foreach ($variants as $key => $value) {
             $json["columns"][$key] = $json["columns"][0];
             $json["columns"][$key]["imageUrl"] = $value["image_urls"][0];
             $json["columns"][$key]["action"]["label"] = $value["color"]["name"];
-            $json["columns"][$key]["action"]["data"] = $command_postback_image_color . "=" . $value["id"];
+            $json["columns"][$key]["action"]["data"] = $command_postback_image_color . "=" . $key . "=" . $product_id;
             $json["columns"][$key]["action"]["displayText"] = "Color: " . $value["color"]["name"] . " for ". $product_name . ", Checking Stock..";
         }
         return $json;
