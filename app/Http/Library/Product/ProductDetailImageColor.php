@@ -56,7 +56,9 @@ class ProductDetailImageColor
         $json = json_decode(file_get_contents(url('template/detail-image-color.json')), true);
         $api_product = $this->loadProduct($id);
         $variant_color = $api_product["variants"][$index];
+        $variant_size = $variant_color["sizes"];
         $color_name = $variant_color["color"]["name"];
+        $color_rgb = $variant_color["color"]["rgb"];
         $product_name = $api_product["name"];
         $no_images = "https://perdamsi.or.id/theme/perdamsi/images/no-preview.jpg?dadead2ca4";
 
@@ -65,6 +67,15 @@ class ProductDetailImageColor
         $json["body"]["contents"][0]["contents"][1]["contents"][0]["url"] = !isset($variant_color["image_urls"][1]) ?  $no_images : $variant_color["image_urls"][1];
         $json["body"]["contents"][0]["contents"][1]["contents"][1]["url"] = !isset($variant_color["image_urls"][2]) ?  $no_images : $variant_color["image_urls"][2];
         $json["body"]["contents"][1]["contents"][0]["text"] = $color_name;
+        $json["body"]["contents"][1]["contents"][0]["color"] = $color_rgb;
+
+        foreach ($variant_size as $key => $value) {
+            $json["body"]["contents"][1]["contents"][2]["contents"][0 + $key] = $json["body"]["contents"][1]["contents"][2]["contents"][0];
+            $json["body"]["contents"][1]["contents"][2]["contents"][1 + $key] = $json["body"]["contents"][1]["contents"][2]["contents"][1];
+
+            $json["body"]["contents"][1]["contents"][2]["contents"][0 + $key]["text"] = $value["size"];
+            $json["body"]["contents"][1]["contents"][2]["contents"][1 + $key]["text"] = $value["stock"];
+        }
 
         //TODO: Lancrotkan Foreach
 
