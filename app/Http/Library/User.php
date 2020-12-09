@@ -41,7 +41,7 @@ class User{
 
     public function registerUser($event)
     {
-        $data["line_id"] = $event['source']['userId'];
+        $data["line_id"] = $this->getLineId($event);
         $data["name"] = $this->getDisplayName($data["line_id"]);
         (new UserModel)->register($data);
     }
@@ -49,6 +49,11 @@ class User{
     //* ---------------------------------------------------------------------------------------------------------------- *//
 
     //* --------------------------------------- MODIFIER PRIVATE PROPERTY ---------------------------------------------- *//
+
+    private function getLineId($event){
+        $this->setId($event['source']['userId']);
+        return $this->getId();
+    }
 
     private function getDisplayName($line_id)
     {

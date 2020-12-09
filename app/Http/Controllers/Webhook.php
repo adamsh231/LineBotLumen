@@ -14,6 +14,7 @@ use LINE\LINEBot\MessageBuilder\TextMessageBuilder;
 use LINE\LINEBot\TemplateActionBuilder\MessageTemplateActionBuilder;
 
 use App\Http\Library\User;
+use App\Http\Library\Command;
 
 
 class Webhook extends Controller
@@ -23,15 +24,11 @@ class Webhook extends Controller
     private $response;
     private $httpClient;
     private $data;
-
     private $user;
 
-    private $WEB_URL = "https://shoesmartlinebot.herokuapp.com/";
     private $WEB_URL_OFFICIAL = "https://shoesmart.co.id/";
-    private $DEFAULT_GREETINGS = "Halo, Shoesmarter!";
     private $WEB_URL_API = "https://api.shoesmart.co.id/";
     private $NEW_ARRIVAL = "[5694,5297,5336,5308,5188,4507,5015,4891,5063,5027]";
-    // private $NEW_ARRIVAL = "[5694,5297,5336,5308,5188,4507,5015,4891,5063,5027,5122,5149]";   //update 18/11/2020
 
     private $COMMAND = array(
         "help" => "!help",
@@ -50,7 +47,7 @@ class Webhook extends Controller
         $this->data = $request->all();
 
         // ------------ Register If Not Registered ------------- //
-            $this->user->registerUser($this->data['events'][0]);
+            $this->user->registerUser($this->data['events'][0]); //TODO: Why event is an array?, 0 -> first event
         // ----------------------------------------------------- //
     }
 
@@ -75,7 +72,7 @@ class Webhook extends Controller
     private function replyMessage($event)
     {
         if ($event['message']['type'] == 'text') {
-            if ($this->isCommand($event['message']['text'])) {
+            if ((new Command)->isCommand($event['message']['text'])) {
                 if ($event['message']['text'] == $this->COMMAND['new_arrival']) {
                     $this->newArrival($event);
                 }
@@ -85,11 +82,6 @@ class Webhook extends Controller
         } else {
             //TODO: reply user if not text message
         }
-    }
-
-    private function isCommand($text)
-    {
-        return (($text[0] == '!') ? TRUE : FALSE);
     }
 
     private function newArrival($event)
