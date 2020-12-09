@@ -21,6 +21,10 @@ class ProductNewArrival{
         $this->product = new Product;
     }
 
+    public function getListNewArrival(){
+        return $this->NEW_ARRIVAL;
+    }
+
     //* --------------------------------------- MODIFIER PUBLIC PROPERTY ----------------------------------------------- *//
 
     public function loadFlex($event){
@@ -39,7 +43,7 @@ class ProductNewArrival{
             }
 
             $json["contents"][$key]["body"]["contents"][3]["text"] = "Rp " . number_format($value["final_price"], 0, ",", ".");
-            $json["contents"][$key]["footer"]["action"]["uri"] = $this->product->WEB_URL_OFFICIAL . "product/" . $value["id"] . "/0";
+            $json["contents"][$key]["footer"]["action"]["uri"] = $this->product->getWebUrlOfficial() . "product/" . $value["id"] . "/0";
         }
 
         $this->httpClient->post(LINEBot::DEFAULT_ENDPOINT_BASE . '/v2/bot/message/reply', [
@@ -60,7 +64,7 @@ class ProductNewArrival{
 
     private function loadProduct()
     {
-        $api_new_arrival = $this->product->WEB_URL_API . "products?product_ids=" . $this->NEW_ARRIVAL . "&_sort=name&_order=asc&_start=0&_end=15";
+        $api_new_arrival = $this->product->getWebUrlApi() . "products?product_ids=" . $this->NEW_ARRIVAL . "&_sort=name&_order=asc&_start=0&_end=15";
         $product_new_arrival = $this->httpClient->get($api_new_arrival);
         $product_new_arrival = json_decode($product_new_arrival->getRawBody(), true);
         return $product_new_arrival;
