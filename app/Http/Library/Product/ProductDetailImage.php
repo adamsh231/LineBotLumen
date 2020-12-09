@@ -53,7 +53,7 @@ class ProductDetailImage
 
     private function templateProductDetail($id)
     {
-        $command_postback_image_color = $this->command->getCommand()['detail_image'];
+        // $command_postback_image_color = $this->command->getCommand()['detail_image'];
         $json = json_decode(file_get_contents(url('template/detail-image.json')), true);
         $api_product = $this->loadProduct($id);
         $variants = $api_product["variants"];
