@@ -69,9 +69,12 @@ class Webhook extends Controller
             if ($this->command->isCommand($event['message']['text'])) {
                 if ($event['message']['text'] == $command['new_arrival']) {
                     (new ProductNewArrival)->loadTemplate($event);
+                }else if($event['message']['text'] == $command['help']){
+                    (new Message)->sendMessage($event, (new Text)->getHelpCommand());
+                }else if($event['message']['text'] == $command['info']){
+                    (new Message)->sendMessage($event, (new Text)->getInfoCommand());
                 }
             } else {
-                //TODO: reply user if not command
                 (new Message)->sendMessage($event, (new Text)->getFalseCommand());
             }
         } else {

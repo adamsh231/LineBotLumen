@@ -22,10 +22,10 @@ class Message
     {
         $messageBuilder = [];
         $multiMessageBuilder = new MultiMessageBuilder();
-        foreach($arr_text as $key => $value){
-            if($value["type"] == "text"){
+        foreach ($arr_text as $key => $value) {
+            if ($value["type"] == "text") {
                 $messageBuilder[$key] = new TextMessageBuilder($value["text"]);
-            }else{
+            } else {
                 //TODO: Define Soon!
             }
             $multiMessageBuilder->add($messageBuilder[$key]);
@@ -37,7 +37,8 @@ class Message
 
     //* --------------------------------------- MODIFIER PUBLIC PROPERTY ----------------------------------------------- *//
 
-    private function decodeEmoji($emoji){
+    private function decodeEmoji($emoji)
+    {
         $code = str_replace('0x', '', $emoji);
         $bin = hex2bin(str_repeat('0', 8 - strlen($code)) . $code);
         $emoticon =  mb_convert_encoding($bin, 'UTF-8', 'UTF-32BE');

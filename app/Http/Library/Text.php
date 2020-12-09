@@ -15,15 +15,18 @@ class Text
         $this->setFalseCommand();
     }
 
-    public function getHelpCommand(){
+    public function getHelpCommand()
+    {
         return $this->help_command;
     }
 
-    public function getInfoCommand(){
+    public function getInfoCommand()
+    {
         return $this->info_command;
     }
 
-    public function getFalseCommand(){
+    public function getFalseCommand()
+    {
         return $this->false_command;
     }
 
@@ -31,17 +34,17 @@ class Text
 
     private function setHelpCommand()
     {
-        $help = "Command List". PHP_EOL
-                ."'!help' : Melihat list command". PHP_EOL
-                ."'!info' : Informasi Tentang Shoesmart". PHP_EOL
-                ."'!new'  : Menampilkan Produk New Arrival". PHP_EOL
-                ."'!promo': Menampilkan Promo Terbaru";
+        $help = "Command List" . PHP_EOL
+            . "'!help' : Melihat list command" . PHP_EOL
+            . "'!info' : Informasi Tentang Shoesmart" . PHP_EOL
+            . "'!new'  : Menampilkan Produk New Arrival" . PHP_EOL
+            . "'!promo': Menampilkan Promo Terbaru";
         $this->help_command[0] = array("type" => "text", "text" => $help);
     }
 
     private function setFalseCommand()
     {
-        $false = "Perintah tidak diketahui, Silahkan ketik '!help' untuk melihat daftar command";
+        $false = "Perintah tidak diketahui." . PHP_EOL . " ketik '!help' untuk melihat daftar command";
         $this->false_command[0] = array("type" => "text", "text" => $false);
     }
 
