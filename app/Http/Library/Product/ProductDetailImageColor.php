@@ -73,8 +73,8 @@ class ProductDetailImageColor
             $json["body"]["contents"][1]["contents"][2]["contents"][0 + $key] = $json["body"]["contents"][1]["contents"][2]["contents"][0];
             $json["body"]["contents"][1]["contents"][2]["contents"][1 + $key] = $json["body"]["contents"][1]["contents"][2]["contents"][1];
 
-            $json["body"]["contents"][1]["contents"][2]["contents"][0 + $key]["text"] = $value["size"];
-            $json["body"]["contents"][1]["contents"][2]["contents"][1 + $key]["text"] = $value["stock"];
+            // $json["body"]["contents"][1]["contents"][2]["contents"][0 + $key]["text"] = $value["size"];
+            // $json["body"]["contents"][1]["contents"][2]["contents"][1 + $key]["text"] = $value["stock"];
         }
 
         //TODO: Lancrotkan Foreach
