@@ -20,8 +20,8 @@ class ProductDetailImage{
     }
 
     //* --------------------------------------- MODIFIER PUBLIC PROPERTY ----------------------------------------------- *//
-    public function loadTemplate($event){
-        $json = $this->templateProductDetail();
+    public function loadTemplate($event, $id){
+        $json = $this->templateProductDetail($id);
 
         $this->httpClient->post(LINEBot::DEFAULT_ENDPOINT_BASE . '/v2/bot/message/reply', [
             'replyToken' => $event['replyToken'],
@@ -38,7 +38,7 @@ class ProductDetailImage{
 
     //* --------------------------------------- MODIFIER PRIVATE PROPERTY ---------------------------------------------- *//
 
-    private function loadProduct($id = 2276)
+    private function loadProduct($id)
     {
         $api_product = $this->product->getWebUrlApi() . "products/" . $id;
         $api_product = $this->httpClient->get($api_product);
@@ -46,9 +46,9 @@ class ProductDetailImage{
         return $api_product;
     }
 
-    private function templateProductDetail(){
+    private function templateProductDetail($id){
         $json = json_decode(file_get_contents(url('template/detail-image.json')), true);
-        $api_product = $this->loadProduct();
+        $api_product = $this->loadProduct($id);
         $variants = $api_product["variants"];
         foreach ($variants as $key => $value) {
             $json["columns"][$key] = $json["columns"][0];

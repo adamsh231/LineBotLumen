@@ -2,17 +2,16 @@
 
 namespace App\Http\Library;
 
-class Command{
+class Command
+{
 
     private $COMMAND = array(
-        "help" => "!help",
         "new_arrival" => "!new",
-        "promo" => "!promo",
-
-        "detail_image" => "!image"
+        "detail_image" => "!image",
     );
 
-    public function getCommand(){
+    public function getCommand()
+    {
         return $this->COMMAND;
     }
 
@@ -21,6 +20,14 @@ class Command{
     public function isCommand($text)
     {
         return (($text[0] == '!') ? TRUE : FALSE);
+    }
+
+    public function splitCommand($text)
+    {
+        $splitter = explode("=", $text);
+        $split["command"] = $splitter[0];
+        $split["data"] = $splitter[1];
+        return $split;
     }
 
     //* ---------------------------------------------------------------------------------------------------------------- *//

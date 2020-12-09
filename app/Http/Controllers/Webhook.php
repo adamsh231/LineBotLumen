@@ -41,7 +41,7 @@ class Webhook extends Controller
         $this->data = $request->all();
 
         // ------------ Register If Not Registered ------------- //
-        $this->user->registerUser($this->data['events'][0]); //TODO: Why event is an array?, 0 -> first event
+        $this->user->registerUser($this->data['events'][0]); //TODO: Why event is an array? | Change follow event soon!
         // ----------------------------------------------------- //
     }
 
@@ -54,6 +54,8 @@ class Webhook extends Controller
             foreach ($data['events'] as $event) {
                 if ($event['type'] == 'message') {
                     $this->replyMessage($event);
+                }else if($event['type'] == 'postback'){
+                    $this->replyPostBack($event);
                 }
             }
         }
@@ -65,18 +67,25 @@ class Webhook extends Controller
     //* ----------------------------------------- PRIVATE METHOD ------------------------------------------------- *//
     private function replyMessage($event)
     {
+        $command = $this->command->getCommand();
         if ($event['message']['type'] == 'text') {
             if ($this->command->isCommand($event['message']['text'])) {
-                if ($event['message']['text'] == $this->command->getCommand()['new_arrival']) {
+                if ($event['message']['text'] == $command['new_arrival']) {
                     (new ProductNewArrival)->loadTemplate($event);
-                }else if($event['message']['text'] == $this->command->getCommand()['detail_image']){
-                    (new ProductDetailImage)->loadTemplate($event);
                 }
             } else {
                 //TODO: reply user if not command
             }
         } else {
             //TODO: reply user if not text message
+        }
+    }
+
+    private function replyPostBack($event){
+        $command = $this->command->getCommand();
+        $event_command = $this->command->splitCommand($event['data']);
+        if($event_command['command'] == $command['detail_image']){
+            (new ProductDetailImage)->loadTemplate($event, $event_command['data']);
         }
     }
     //* ---------------------------------------------------------------------------------------------------------- *//

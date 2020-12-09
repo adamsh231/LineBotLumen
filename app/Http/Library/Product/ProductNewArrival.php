@@ -10,6 +10,7 @@ use App\Http\Library\Product\Product;
 class ProductNewArrival{
 
     private $product;
+    private $command;
 
     private $NEW_ARRIVAL = "[5694,5297,5336,5308,5188,4507,5015,4891,5063,5027]";
 
@@ -19,6 +20,7 @@ class ProductNewArrival{
         $this->bot  = new LINEBot($this->httpClient, ['channelSecret' => getenv('CHANNEL_SECRET')]);
 
         $this->product = new Product;
+        $this->command = new Command;
     }
 
     public function getListNewArrival(){
@@ -55,11 +57,14 @@ class ProductNewArrival{
     }
 
     private function templateNewArrival(){
+        $command_postback_image = $this->command->getCommand()['detail_image'];
+
         $json = json_decode(file_get_contents(url('template/new-arrival.json')), true);
         $api_product = $this->loadProduct();
         foreach ($api_product as $key => $value) {
             $json["contents"][$key] = $json["contents"][0];
             $json["contents"][$key]["hero"]["url"] = $value["image_url"];
+            $json["contents"][$key]["hero"]["action"]["data"] = $command_postback_image . $value["id"];
             $json["contents"][$key]["body"]["contents"][0]["text"] = $value["name"];
             $json["contents"][$key]["body"]["contents"][1]["contents"][0]["contents"][0]["text"] = $value["brand_name"];
 

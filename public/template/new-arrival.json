@@ -12,9 +12,9 @@
           "aspectMode": "cover",
           "aspectRatio": "170:210",
           "action": {
-            "type": "message",
+            "type": "postback",
             "label": "action",
-            "text": "Gambar"
+            "data": "hello"
           }
         },
         "body": {
