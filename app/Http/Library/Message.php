@@ -20,7 +20,11 @@ class Message
 
     public function sendMoreMessage($event)
     {
-        $textMessageBuilder1 = new TextMessageBuilder('ini pesan balasan pertama \uDBC0\uDC84');
+        $code = '10008B';
+        $bin = hex2bin(str_repeat('0', 8 - strlen($code)) . $code);
+        $emoticon =  mb_convert_encoding($bin, 'UTF-8', 'UTF-32BE');
+
+        $textMessageBuilder1 = new TextMessageBuilder('ini pesan balasan pertama'. $emoticon);
         $textMessageBuilder2 = new TextMessageBuilder('ini pesan balasan kedua');
         $stickerMessageBuilder = new StickerMessageBuilder(1, 106);
 
