@@ -83,7 +83,7 @@ class Webhook extends Controller
 
     private function replyPostBack($event){
         $command = $this->command->getCommand();
-        $event_command = $this->command->splitCommand($event['data']);
+        $event_command = $this->command->splitCommand($event['postback']['data']);
         if($event_command['command'] == $command['detail_image']){
             (new ProductDetailImage)->loadTemplate($event, $event_command['data']);
         }
