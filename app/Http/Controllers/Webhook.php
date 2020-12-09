@@ -51,7 +51,7 @@ class Webhook extends Controller
             foreach ($data['events'] as $event) {
                 if ($event['type'] == 'message') {
                     $this->replyMessage($event);
-                }else if($event['type'] == 'postback'){
+                } else if ($event['type'] == 'postback') {
                     $this->replyPostBack($event);
                 }
             }
@@ -69,10 +69,12 @@ class Webhook extends Controller
             if ($this->command->isCommand($event['message']['text'])) {
                 if ($event['message']['text'] == $command['new_arrival']) {
                     (new ProductNewArrival)->loadTemplate($event);
-                }else if($event['message']['text'] == $command['help']){
+                } else if ($event['message']['text'] == $command['help']) {
                     (new Message)->sendMessage($event, (new Text)->getHelpCommand());
-                }else if($event['message']['text'] == $command['info']){
+                } else if ($event['message']['text'] == $command['info']) {
                     (new Message)->sendMessage($event, (new Text)->getInfoCommand());
+                } else {
+                    (new Message)->sendMessage($event, (new Text)->getFalseCommand());
                 }
             } else {
                 (new Message)->sendMessage($event, (new Text)->getFalseCommand());
@@ -82,12 +84,13 @@ class Webhook extends Controller
         }
     }
 
-    private function replyPostBack($event){
+    private function replyPostBack($event)
+    {
         $command = $this->command->getCommand();
         $event_command = $this->command->splitCommand($event['postback']['data']);
-        if($event_command['command'] == $command['detail_image']){
+        if ($event_command['command'] == $command['detail_image']) {
             (new ProductDetailImage)->loadTemplate($event, $event_command['data']);
-        }else if($event_command['command'] == $command['detail_image_color']){
+        } else if ($event_command['command'] == $command['detail_image_color']) {
             (new ProductDetailImageColor)->loadTemplate($event, $event_command['data'], $event_command[2]);
         }
     }

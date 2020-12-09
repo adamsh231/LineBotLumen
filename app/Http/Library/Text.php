@@ -44,19 +44,19 @@ class Text
 
     private function setFalseCommand()
     {
-        $false = "Perintah tidak diketahui." . PHP_EOL . " ketik '!help' untuk melihat daftar command";
+        $false = "Perintah tidak diketahui." . PHP_EOL . "ketik '!help' untuk melihat daftar command";
         $this->false_command[0] = array("type" => "text", "text" => $false);
     }
 
     private function setInfoCommand()
     {
-        $intro = "Shoesmart adalah Start up E-commerce khusus sepatu wanita dan pria
-                yang didirikan pada 2016. Kami hadir sebagai jawaban atas tantangan dunia
-                teknologi yang semakin maju, termasuk dalam hal berbelanja secara online.
-                Sebagai platform online yang mempertemukan antara pebisnis sepatu lokal dan
-                para pembelinya, Shoesmart menyediakan berbagai macam produk sepatu terkini
-                berkualitas dengan harga terjangkau keluaran berbagai brand lokal terbaik di
-                Indonesia.";
+        $intro = "Shoesmart adalah Start up E-commerce khusus sepatu wanita dan pria" . PHP_EOL .
+                "yang didirikan pada 2016. Kami hadir sebagai jawaban atas tantangan dunia". PHP_EOL .
+                "teknologi yang semakin maju, termasuk dalam hal berbelanja secara online.". PHP_EOL .
+                "Sebagai platform online yang mempertemukan antara pebisnis sepatu lokal dan". PHP_EOL .
+                "para pembelinya, Shoesmart menyediakan berbagai macam produk sepatu terkini". PHP_EOL .
+                "berkualitas dengan harga terjangkau keluaran berbagai brand lokal terbaik di". PHP_EOL .
+                "Indonesia.";
         $this->info_command[0] = array("type" => "text", "text" => $intro);
     }
 
