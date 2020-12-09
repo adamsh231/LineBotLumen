@@ -43,7 +43,7 @@ class ProductDetailImage
 
     //* --------------------------------------- MODIFIER PRIVATE PROPERTY ---------------------------------------------- *//
 
-    protected function loadProduct($id)
+    private function loadProduct($id)
     {
         $api_product = $this->product->getWebUrlApi() . "products/" . $id;
         $api_product = $this->httpClient->get($api_product);
