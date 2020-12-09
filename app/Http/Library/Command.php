@@ -7,7 +7,9 @@ class Command{
     private $COMMAND = array(
         "help" => "!help",
         "new_arrival" => "!new",
-        "promo" => "!promo"
+        "promo" => "!promo",
+
+        "detail_image" => "!image"
     );
 
     public function getCommand(){

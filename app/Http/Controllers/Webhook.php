@@ -16,7 +16,7 @@ use LINE\LINEBot\TemplateActionBuilder\MessageTemplateActionBuilder;
 use App\Http\Library\User;
 use App\Http\Library\Command;
 use App\Http\Library\Product\ProductNewArrival;
-use Illuminate\Support\Facades\Redis;
+use App\Http\Library\Product\ProductDetailImage;
 
 class Webhook extends Controller
 {
@@ -68,7 +68,9 @@ class Webhook extends Controller
         if ($event['message']['type'] == 'text') {
             if ($this->command->isCommand($event['message']['text'])) {
                 if ($event['message']['text'] == $this->command->getCommand()['new_arrival']) {
-                    (new ProductNewArrival)->loadFlex($event);
+                    (new ProductNewArrival)->loadTemplate($event);
+                }else if($event['message']['text'] == $this->command->getCommand()['detail_image']){
+                    (new ProductDetailImage)->loadTemplate($event);
                 }
             } else {
                 //TODO: reply user if not command

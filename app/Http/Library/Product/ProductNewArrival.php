@@ -27,15 +27,15 @@ class ProductNewArrival{
 
     //* --------------------------------------- MODIFIER PUBLIC PROPERTY ----------------------------------------------- *//
 
-    public function loadFlex($event){
-        $json = $this->flexNewArrival();
+    public function loadTemplate($event){
+        $json = $this->templateNewArrival();
 
         $this->httpClient->post(LINEBot::DEFAULT_ENDPOINT_BASE . '/v2/bot/message/reply', [
             'replyToken' => $event['replyToken'],
             'messages'   => [
                 [
                     'type'     => 'flex',
-                    'altText'  => 'Test Flex Message',
+                    'altText'  => 'New Arrival Flex Message',
                     'contents' => $json
                 ]
             ],
@@ -54,8 +54,8 @@ class ProductNewArrival{
         return $product_new_arrival;
     }
 
-    private function flexNewArrival(){
-        $json = json_decode(file_get_contents(url('flex/new-arrival.json')), true);
+    private function templateNewArrival(){
+        $json = json_decode(file_get_contents(url('template/new-arrival.json')), true);
         $product_new_arrival = $this->loadProduct();
         foreach ($product_new_arrival as $key => $value) {
             $json["contents"][$key] = $json["contents"][0];
