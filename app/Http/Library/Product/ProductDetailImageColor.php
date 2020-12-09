@@ -53,8 +53,8 @@ class ProductDetailImageColor{
         $json = json_decode(file_get_contents(url('template/detail-image-color.json')), true);
         $api_product = $this->loadProduct($id);
         $variant_color = $api_product["variants"][$index];
+        $color_name = $variant_color["color"]["name"];
         $product_name = $api_product["name"];
-        $color_name = $api_product["variants"]["color"]["name"];
 
         $json["header"]["contents"][0]["text"] = $product_name;
         $json["body"]["contents"][0]["contents"][0]["url"] = $variant_color["image_urls"][0];
