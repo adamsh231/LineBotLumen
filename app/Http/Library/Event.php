@@ -20,9 +20,7 @@ class Event
     //* --------------------------------------- MODIFIER PUBLIC PROPERTY ----------------------------------------------- *//
     public function loadTemplate($event)
     {
-        // $json = $this->templateEvent();
-        $json = json_decode(file_get_contents(url('template/event.json')), true);
-
+        $json = $this->templateEvent();
 
         $this->httpClient->post(LINEBot::DEFAULT_ENDPOINT_BASE . '/v2/bot/message/reply', [
             'replyToken' => $event['replyToken'],
@@ -41,10 +39,10 @@ class Event
 
     private function loadEvent()
     {
-        $api_product = $this->product->getWebUrlApi() . "segments?_sort=id&_order=desc&_start=0&_end=26&is_displayed=1";
-        $api_product = $this->httpClient->get($api_product);
-        $api_product = json_decode($api_product->getRawBody(), true);
-        return $api_product;
+        $api_event = $this->product->getWebUrlApi() . "segments?_sort=id&_order=desc&_start=0&_end=26&is_displayed=1";
+        $api_event = $this->httpClient->get($api_event);
+        $api_event = json_decode($api_event->getRawBody(), true);
+        return $api_event;
     }
 
     private function templateEvent()
