@@ -39,7 +39,8 @@ class Event
 
     private function loadEvent()
     {
-        $api_event = $this->product->getWebUrlApi() . "segments?_sort=id&_order=desc&_start=0&_end=26&is_displayed=1";
+        // $api_event = $this->product->getWebUrlApi() . "segments?_sort=id&_order=desc&_start=0&_end=26&is_displayed=1";
+        $api_event = $this->product->getWebUrlApi() . "promonew/query?is_active=1&is_displayed=1";
         $api_event = $this->httpClient->get($api_event);
         $api_event = json_decode($api_event->getRawBody(), true);
         return $api_event;
@@ -52,13 +53,14 @@ class Event
         $api_event = $this->loadEvent();
         $key = 0;
         foreach ($api_event as $value) {
-            if (!is_null($value["link"])) {
-                $json["columns"][$key] = $json["columns"][0];
-                // $json["columns"][$key]["imageUrl"] = $value["catalogs"][0]["image_large"];
-                $json["columns"][$key]["action"]["label"] = $value["name"];
-                $json["columns"][$key]["action"]["uri"] = $value["link"];
-                $key++;
-            }
+            $json["columns"][$key]["action"]["label"] = $value["name"];
+            // if (!is_null($value["link"])) {
+            //     $json["columns"][$key] = $json["columns"][0];
+            //     // $json["columns"][$key]["imageUrl"] = $value["catalogs"][0]["image_large"];
+            //     $json["columns"][$key]["action"]["label"] = $value["name"];
+            //     $json["columns"][$key]["action"]["uri"] = $value["link"];
+            //     $key++;
+            // }
         }
         return $json;
     }
