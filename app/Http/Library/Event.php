@@ -52,8 +52,8 @@ class Event
         $api_event = $this->loadEvent();
         $key = 0;
         foreach ($api_event as $value) {
-            $json["columns"][4] = $json["columns"][0];
-            $json["columns"][4]["action"]["uri"] = "https://mekiliar.com".$key;
+            $json["columns"][0] = $json["columns"][0];
+            $json["columns"][0]["action"]["uri"] = "https://mekiliar.com".$key;
             // if ($value["link"] != "") {
             //     $json["columns"][$key] = $json["columns"][0];
             //     $json["columns"][$key]["imageUrl"] = $value["catalogs"][0]["image_large"];
