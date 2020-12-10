@@ -65,6 +65,7 @@ class Event
 
         foreach($data as $key => $value){
             $json["columns"][$key] = $json["columns"][0];
+            $json["columns"][$key]["imageUrl"] = $value["imageUrl"];
         }
 
         return $json;
