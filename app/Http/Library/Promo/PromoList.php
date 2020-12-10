@@ -59,7 +59,7 @@ class PromoList
             $tanggal = $this->viewPeriodePromo($value["start"], $value["stop"]);
             $json["contents"][$key]["footer"]["contents"][1]["contents"][0]["contents"][1]["text"] = $tanggal;
 
-            $json["contents"][$key]["footer"]["contents"][1]["contents"][1]["contents"][0]["action"]["uri"] = $this->promo->getWebUrlApi() . "Promo/detail/" . $value["id"];
+            $json["contents"][$key]["footer"]["contents"][1]["contents"][1]["contents"][0]["action"]["uri"] = $this->promo->getWebUrlOfficial() . "Promo/detail/" . $value["id"];
         }
         return $json;
     }
