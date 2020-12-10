@@ -10,6 +10,7 @@ class Command
         "help" => "!help",
         "info" => "!info",
         "promo" => "!promo",
+        "event" => "!event",
 
         // ---- Only Postback ----- //
         "detail_image" => "!image",

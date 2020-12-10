@@ -16,6 +16,7 @@ use App\Http\Library\Product\ProductNewArrival;
 use App\Http\Library\Product\ProductDetailImage;
 use App\Http\Library\Product\ProductDetailImageColor;
 use App\Http\Library\Promo;
+use App\Http\Library\Event;
 
 class Webhook extends Controller
 {
@@ -77,6 +78,8 @@ class Webhook extends Controller
                     (new Message)->sendMessages($event, (new Text)->getInfoCommand());
                 } else if ($event['message']['text'] == $command['promo']) {
                     (new Promo)->loadTemplate($event);
+                } else if ($event['message']['text'] == $command['event']) {
+                    (new Event)->loadTemplate($event);
                 } else {
                     (new QuickReply)->loadDefaultQuickReply($event, (new Text)->getFalseCommand()[0]["text"]);
                 }
