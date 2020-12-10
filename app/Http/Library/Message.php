@@ -46,10 +46,11 @@ class Message
         return $emoji;
     }
 
-    private function detectEmoji($text){
+    private function detectEmoji($text)
+    {
         $split = explode(' ', $text);
-        foreach($split as $key => $value){
-            if(strpos($value, '0x')){
+        foreach ($split as $key => $value) {
+            if ($value[0] == '0' && $value[1] == 'x') {
                 $split[$key] = $this->decodeEmoji($value);
             }
         }
