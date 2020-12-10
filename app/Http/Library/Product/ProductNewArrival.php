@@ -13,7 +13,7 @@ class ProductNewArrival{
     private $product;
     private $command;
 
-    private $NEW_ARRIVAL = "[5694,5297,5336,5308,5188,4507,5015,4891,5063,5027]";
+    private $NEW_ARRIVAL = "[5694,5297,5336,5308,5188,4507,5015,4891,5063,5027,5122,5149]";
 
     public function __construct()
     {

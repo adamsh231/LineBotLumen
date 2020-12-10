@@ -38,6 +38,13 @@ class PromoList
     //* ---------------------------------------------------------------------------------------------------------------- *//
 
     //* --------------------------------------- MODIFIER PRIVATE PROPERTY ---------------------------------------------- *//
+    private function loadPromo()
+    {
+        $api_promo = $this->promo->getWebUrlApi() . "promonew/query?is_active=1&is_displayed=1";
+        $api_promo = $this->httpClient->get($api_promo);
+        $api_promo = json_decode($api_promo->getRawBody(), true);
+        return $api_promo;
+    }
     //* ---------------------------------------------------------------------------------------------------------------- *//
 
 }
