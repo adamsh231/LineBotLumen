@@ -55,7 +55,7 @@ class Event
             $json["columns"][1] = $json["columns"][0];
             $json["columns"][2] = $json["columns"][0];
             $json["columns"][3] = $json["columns"][0];
-            // $json["columns"][$key]["action"]["uri"] = "https://mekiliar.com";
+            $json["columns"][1]["action"]["uri"] = "https://mekiliar.com".$key;
             // if ($value["link"] != "") {
             //     $json["columns"][$key] = $json["columns"][0];
             //     $json["columns"][$key]["imageUrl"] = $value["catalogs"][0]["image_large"];
