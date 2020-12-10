@@ -88,14 +88,6 @@
                     }
                 ]
             }
-        },
-        {
-            "type": "bubble",
-            "body": {
-                "type": "box",
-                "layout": "vertical",
-                "contents": []
-            }
         }
     ]
 }
