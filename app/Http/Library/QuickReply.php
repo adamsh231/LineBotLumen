@@ -17,7 +17,7 @@ class QuickReply
     //* --------------------------------------- MODIFIER PUBLIC PROPERTY ----------------------------------------------- *//
     public function loadQuickReply($event)
     {
-        $json = json_decode(file_get_contents(url('template/detail-image-color.json')), true);
+        $json = json_decode(file_get_contents(url('template/quick-reply.json')), true);
 
         $this->httpClient->post(LINEBot::DEFAULT_ENDPOINT_BASE . '/v2/bot/message/reply', [
             'replyToken' => $event['replyToken'],
