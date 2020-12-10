@@ -26,7 +26,7 @@ class Webhook extends Controller
     private $user;
     private $data;
 
-    public function __construct(Request $request, Response $response, User $user, Command $command)
+    public function __construct()
     {
         $this->httpClient = new CurlHTTPClient(getenv('CHANNEL_ACCESS_TOKEN'));
         $this->bot  = new LINEBot($this->httpClient, ['channelSecret' => getenv('CHANNEL_SECRET')]);
@@ -36,7 +36,7 @@ class Webhook extends Controller
         $this->user = new User;
         $this->command = new Command;
 
-        $this->data = $request->all();
+        $this->data = $this->request->all();
 
         // ------------ Register If Not Registered ------------- //
         $this->user->registerUser($this->data['events'][0]); //TODO: Event is an array | Change follow event soon!
