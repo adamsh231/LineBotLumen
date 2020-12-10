@@ -39,8 +39,10 @@ class Event
 
     private function loadEvent()
     {
+        //TODO: Why event segment tidak bisa??? sedangkan promo bisa?? WTF!!
         // $api_event = $this->product->getWebUrlApi() . "segments?_sort=id&_order=desc&_start=0&_end=26&is_displayed=1";
         $api_event = $this->product->getWebUrlApi() . "promonew/query?is_active=1&is_displayed=1";
+
         $api_event = $this->httpClient->get($api_event);
         $api_event = json_decode($api_event->getRawBody(), true);
         return $api_event;
@@ -53,6 +55,8 @@ class Event
         $api_event = $this->loadEvent();
         foreach ($api_event as $key => $value) {
             $json["columns"][$key] = $json["columns"][0];
+            $json["columns"][$key]["imageUrl"] = $value["image_square"];
+            //TODO: Coba ganti label dengan promo!!
         }
         return $json;
     }
