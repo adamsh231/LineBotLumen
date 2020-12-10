@@ -55,8 +55,8 @@ class PromoList
             $json["contents"][$key]["body"]["contents"][0]["text"] = $value["name"];
             $json["contents"][$key]["body"]["contents"][1]["text"] = $value["description_short"];
             $json["contents"][$key]["footer"]["contents"][1]["contents"][0]["contents"][1]["text"] = "Coming Soon!";
-            $json["contents"][$key]["footer"]["contents"][1]["contents"][1]["contents"][0]["data"] = "PostBack!";
-            $json["contents"][$key]["footer"]["contents"][1]["contents"][1]["contents"][0]["displayText"] = "Text Post Back";
+            $json["contents"][$key]["footer"]["contents"][1]["contents"][1]["contents"][0]["action"]["data"] = "PostBack!";
+            $json["contents"][$key]["footer"]["contents"][1]["contents"][1]["contents"][0]["action"]["displayText"] = "Text Post Back";
         }
         return $json;
     }
