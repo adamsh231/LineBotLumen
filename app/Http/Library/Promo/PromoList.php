@@ -54,11 +54,26 @@ class PromoList
             $json["contents"][$key]["hero"]["url"] = $value["image_square"];
             $json["contents"][$key]["body"]["contents"][0]["text"] = $value["name"];
             $json["contents"][$key]["body"]["contents"][1]["text"] = $value["description_short"];
-            $json["contents"][$key]["footer"]["contents"][1]["contents"][0]["contents"][1]["text"] = "Coming Soon!";
+
+            $tanggal = $this->viewPeriodePromo($value["start"], $value["stop"]);
+            $json["contents"][$key]["footer"]["contents"][1]["contents"][0]["contents"][1]["text"] = $tanggal;
+
+            //TODO: Postback!
             $json["contents"][$key]["footer"]["contents"][1]["contents"][1]["contents"][0]["action"]["data"] = "PostBack!";
             $json["contents"][$key]["footer"]["contents"][1]["contents"][1]["contents"][0]["action"]["displayText"] = "Text Post Back";
         }
         return $json;
+    }
+
+    private function viewPeriodePromo($start, $stop){
+        $start = strtotime(explode(' ', $start)[0]);
+        $stop = strtotime(explode(' ', $stop)[0]);
+        $format1 = date('d M', $start) . " - " . date('d M Y', $stop);
+        $format2 = date('d', $start) . " - " . date('d F Y', $stop);
+        $month_start = explode(' ', $format1)[1];
+        $month_stop = explode(' ', $format1)[4];
+        $tanggal = ($month_start == $month_stop) ? $format2 : $format1;
+        return $tanggal;
     }
     //* ---------------------------------------------------------------------------------------------------------------- *//
 
