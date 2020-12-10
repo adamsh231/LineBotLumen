@@ -5,7 +5,7 @@
             "imageUrl": "https://example.com/bot/images/item2.jpg",
             "action": {
                 "type": "uri",
-                "label": "View detail",
+                "label": "Lihat event",
                 "uri": "http://example.com/page/222"
             }
         }

@@ -39,9 +39,9 @@ class Event
 
     private function loadEvent()
     {
-        //TODO: Why event segment tidak bisa??? sedangkan promo bisa?? WTF!!
+        //!! Anything Goes Wrong with the Api, Api response has Null or Something that cause an Error -> Template won't Rendering !!//
+        //!! So, I make new Array for store the data first !!//
         $api_event = $this->product->getWebUrlApi() . "segments?_sort=id&_order=desc&_start=0&_end=26&is_displayed=1";
-        // $api_event = $this->product->getWebUrlApi() . "promonew/query?is_active=1&is_displayed=1";
 
         $api_event = $this->httpClient->get($api_event);
         $api_event = json_decode($api_event->getRawBody(), true);
@@ -53,6 +53,8 @@ class Event
         $json = json_decode(file_get_contents(url('template/event.json')), true);
 
         $api_event = $this->loadEvent();
+
+        //!! ----------------------- Create new Array for Store the data -------------------------- !!//
         $data = [];
         $key = 0;
         foreach ($api_event as $value) {
@@ -62,10 +64,12 @@ class Event
                 $key++;
             }
         }
+        //!! -------------------------------------------------------------------------------------- !!//
 
         foreach($data as $key => $value){
             $json["columns"][$key] = $json["columns"][0];
             $json["columns"][$key]["imageUrl"] = $value["imageUrl"];
+            $json["columns"][$key]["action"]["uri"] = $value["link"];
         }
 
         return $json;
