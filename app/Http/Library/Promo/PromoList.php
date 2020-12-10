@@ -46,7 +46,8 @@ class PromoList
         return $api_promo;
     }
 
-    private function templatePromoList(){
+    private function templatePromoList()
+    {
         $json = json_decode(file_get_contents(url('template/promo-list.json')), true);
         $api_promo = $this->loadPromo();
         foreach ($api_promo as $key => $value) {
@@ -58,14 +59,13 @@ class PromoList
             $tanggal = $this->viewPeriodePromo($value["start"], $value["stop"]);
             $json["contents"][$key]["footer"]["contents"][1]["contents"][0]["contents"][1]["text"] = $tanggal;
 
-            //TODO: Postback!
-            $json["contents"][$key]["footer"]["contents"][1]["contents"][1]["contents"][0]["action"]["data"] = "PostBack!";
-            $json["contents"][$key]["footer"]["contents"][1]["contents"][1]["contents"][0]["action"]["displayText"] = "Text Post Back";
+            $json["contents"][$key]["footer"]["contents"][1]["contents"][1]["contents"][0]["action"]["uri"] = $this->promo->getWebUrlApi() . "Promo/detail/" . $value["id"];
         }
         return $json;
     }
 
-    private function viewPeriodePromo($start, $stop){
+    private function viewPeriodePromo($start, $stop)
+    {
         $start = strtotime(explode(' ', $start)[0]);
         $stop = strtotime(explode(' ', $stop)[0]);
         $format1 = date('d M', $start) . " - " . date('d M Y', $stop);

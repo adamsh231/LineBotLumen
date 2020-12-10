@@ -100,6 +100,7 @@ class Webhook extends Controller
     }
 
     private function registerUser($data){
+        //TODO: cant get display name -> if blocked
         foreach ($data['events'] as $event) {
             if(isset($event['source']['userId'])) $this->user->registerUser($event);
         }

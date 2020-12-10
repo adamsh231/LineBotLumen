@@ -67,22 +67,23 @@
                                     {
                                         "type": "button",
                                         "action": {
-                                            "type": "postback",
-                                            "label": "Lihat Promo",
-                                            "data": "hello",
-                                            "displayText": "Promo Welcoming Kluikui"
+                                            "type": "uri",
+                                            "label": "action",
+                                            "uri": "http://linecorp.com/"
                                         },
                                         "style": "primary",
                                         "height": "sm",
                                         "margin": "xxl",
                                         "offsetTop": "none",
-                                        "color": "#A88F00"
+                                        "color": "#A88F00",
+                                        "offsetBottom": "none"
                                     }
                                 ],
                                 "paddingAll": "none",
                                 "margin": "none",
                                 "paddingTop": "md",
-                                "paddingEnd": "none"
+                                "paddingEnd": "none",
+                                "paddingBottom": "none"
                             }
                         ]
                     }
