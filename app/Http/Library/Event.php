@@ -26,9 +26,9 @@ class Event
             'replyToken' => $event['replyToken'],
             'messages'   => [
                 [
-                    'type'     => 'template',
+                    'type'     => 'flex',
                     'altText'  => 'Event List',
-                    'template' => $json
+                    'contents' => $json
                 ]
             ],
         ]);
@@ -55,21 +55,19 @@ class Event
         $api_event = $this->loadEvent();
 
         //!! ----------------------- Create new Array for Store the data -------------------------- !!//
-        $data = [];
-        $key = 0;
-        foreach ($api_event as $value) {
-            if($value["link"] != "" && !is_null($value["link"])){
-                $data[$key]["imageUrl"] = $value["catalogs"][0]["image_large"];
-                $data[$key]["link"] = $value["link"];
-                $key++;
-            }
-        }
+        // $data = [];
+        // $key = 0;
+        // foreach ($api_event as $value) {
+        //     if($value["link"] != "" && !is_null($value["link"])){
+        //         $data[$key]["imageUrl"] = $value["catalogs"][0]["image_large"];
+        //         $data[$key]["link"] = $value["link"];
+        //         $key++;
+        //     }
+        // }
         //!! -------------------------------------------------------------------------------------- !!//
 
-        foreach($data as $key => $value){
-            $json["columns"][$key] = $json["columns"][0];
-            $json["columns"][$key]["imageUrl"] = $value["imageUrl"];
-            $json["columns"][$key]["action"]["uri"] = $value["link"];
+        foreach($api_event as $key => $value){
+            $json["contents"][$key] = $json["contents"][0];
         }
 
         return $json;
