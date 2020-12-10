@@ -53,13 +53,20 @@ class Event
         $json = json_decode(file_get_contents(url('template/event.json')), true);
 
         $api_event = $this->loadEvent();
-        foreach ($api_event as $key => $value) {
-            $json["columns"][$key] = $json["columns"][0];
-            // $json["columns"][$key]["imageUrl"] = $value["image_square"];
-            // $json["columns"][$key]["action"]["label"] = substr($value["id"], 0, 12);
-            // $json["columns"][$key]["action"]["uri"] = $this->product->getWebUrlOfficial() . "Promo/detail/" . $value["id"];
-            //TODO: Coba ganti label dengan promo!!
+        $data = [];
+        $key = 0;
+        foreach ($api_event as $value) {
+            if($value["link"] != "" && !is_null($value["link"])){
+                $data[$key]["imageUrl"] = $value["catalogs"][0]["image_large"];
+                $data[$key]["link"] = $value["link"];
+                $key++;
+            }
         }
+
+        foreach($data as $key => $value){
+            $json["columns"][$key] = $json["columns"][0];
+        }
+
         return $json;
     }
 
