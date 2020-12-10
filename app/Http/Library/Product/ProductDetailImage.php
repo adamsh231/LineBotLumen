@@ -63,7 +63,7 @@ class ProductDetailImage
         foreach ($variants as $key => $value) {
             $json["columns"][$key] = $json["columns"][0];
             $json["columns"][$key]["imageUrl"] = !isset($value["image_urls"][0]) ? $no_images : $value["image_urls"][0];
-            $json["columns"][$key]["action"]["label"] = $value["color"]["name"];
+            $json["columns"][$key]["action"]["label"] = substr($value["color"]["name"], 0, 12);
             $json["columns"][$key]["action"]["data"] = $command_postback_image_color . "=" . $key . "=" . $product_id;
             $json["columns"][$key]["action"]["displayText"] = "Color: " . $value["color"]["name"] . " for ". $product_name . ", Checking Stock..";
         }

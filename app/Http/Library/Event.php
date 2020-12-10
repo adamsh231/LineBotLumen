@@ -57,6 +57,7 @@ class Event
             $json["columns"][$key] = $json["columns"][0];
             $json["columns"][$key]["imageUrl"] = $value["image_square"];
             $json["columns"][$key]["action"]["label"] = substr($value["code"], 0, 12);
+            $json["columns"][$key]["action"]["uri"] = $this->product->getWebUrlOfficial() . "Promo/detail/" . $value["id"];
             //TODO: Coba ganti label dengan promo!!
         }
         return $json;
