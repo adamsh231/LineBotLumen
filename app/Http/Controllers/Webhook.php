@@ -41,7 +41,7 @@ class Webhook extends Controller
         $this->data = $this->request->all();
 
         // ------------ Register If Not Registered ------------- //
-        // $this->registerUser($this->data);
+        $this->registerUser($this->data);
         // ----------------------------------------------------- //
     }
 
@@ -59,23 +59,6 @@ class Webhook extends Controller
                 }
             }
         }
-    }
-
-    public function test(){
-        $json = json_decode(file_get_contents(url('template/event.json')), true);
-        $api_event = "api.shoesmart.co.id/" . "segments?_sort=id&_order=desc&_start=0&_end=26&is_displayed=1";
-        $api_event = $this->httpClient->get($api_event);
-        dd($api_event);
-        $api_event = json_decode($api_event->getRawBody(), true);
-        foreach ($api_event as $key => $value) {
-            if ($value["link"] != "") {
-                $json["columns"][$key] = $json["columns"][0];
-                $json["columns"][$key]["imageUrl"] = $value["catalogs"][0]["image_large"];
-                $json["columns"][$key]["action"]["label"] = $value["name"];
-                $json["columns"][$key]["action"]["uri"] = $value["link"];
-            }
-        }
-        return $json;
     }
 
     //* ----------------------------------------------------------------------------------------------------------- *//

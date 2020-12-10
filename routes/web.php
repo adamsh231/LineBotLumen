@@ -22,5 +22,3 @@ $router->get('/key', function(){
 });
 
 $router->post('/webhook', 'Webhook@reply');
-
-$router->get('/test', 'Webhook@test');
