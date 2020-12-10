@@ -11,6 +11,7 @@ use App\Http\Library\User;
 use App\Http\Library\Command;
 use App\Http\Library\Message;
 use App\Http\Library\Text;
+use App\Http\Library\QuickReply;
 use App\Http\Library\Product\ProductNewArrival;
 use App\Http\Library\Product\ProductDetailImage;
 use App\Http\Library\Product\ProductDetailImageColor;
@@ -77,7 +78,7 @@ class Webhook extends Controller
                     (new Message)->sendMessage($event, (new Text)->getFalseCommand());
                 }
             } else {
-                (new Message)->sendMessage($event, (new Text)->getFalseCommand());
+                (new QuickReply)->sendMessage($event, (new Text)->getFalseCommand());
             }
         } else {
             //TODO: reply user if not text message

@@ -45,6 +45,10 @@ class Message
         return $emoticon;
     }
 
+    private function detectEmoji($text){
+        //TODO: Detect and Decode Emojis soon!
+    }
+
     //* ---------------------------------------------------------------------------------------------------------------- *//
 
 }
