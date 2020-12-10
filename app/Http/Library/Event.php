@@ -69,6 +69,7 @@ class Event
         foreach($api_event as $key => $value){
             $json["contents"][$key] = $json["contents"][0];
             $json["contents"][$key]["body"]["contents"][0]["url"] = $value["catalogs"][0]["image_large"];
+            $json["contents"][$key]["action"]["uri"] = $value["link"];
         }
 
         return $json;
