@@ -75,7 +75,7 @@ class Webhook extends Controller
                 } else if ($event['message']['text'] == $command['info']) {
                     (new Message)->sendMessage($event, (new Text)->getInfoCommand());
                 } else {
-                    (new Message)->sendMessage($event, (new Text)->getFalseCommand());
+                    (new QuickReply)->loadDefaultQuickReply($event, (new Text)->getFalseCommand()[0]["text"]);
                 }
             } else {
                 (new QuickReply)->loadDefaultQuickReply($event, (new Text)->getFalseCommand()[0]["text"]);
