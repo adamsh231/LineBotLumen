@@ -78,7 +78,7 @@ class Webhook extends Controller
                     (new Message)->sendMessage($event, (new Text)->getFalseCommand());
                 }
             } else {
-                (new QuickReply)->sendMessage($event, (new Text)->getFalseCommand());
+                (new QuickReply)->loadQuickReply($event, (new Text)->getFalseCommand());
             }
         } else {
             //TODO: reply user if not text message
