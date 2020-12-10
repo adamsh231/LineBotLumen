@@ -53,9 +53,8 @@ class Event
         $key = 0;
         foreach ($api_event as $value) {
             $json["columns"][0] = $json["columns"][0];
-            $json["columns"][0]["action"]["uri"] = "https://mekiliar.com".$key;
+            $json["columns"][0]["action"]["uri"] = "https://mekiliar.com".$value["name"];
             if ($value["link"] != "") {
-                $json["columns"][0]["action"]["label"] = $value["name"];
                 // $json["columns"][$key] = $json["columns"][0];
                 // $json["columns"][$key]["imageUrl"] = $value["catalogs"][0]["image_large"];
                 // $json["columns"][$key]["action"]["label"] = $value["name"];
