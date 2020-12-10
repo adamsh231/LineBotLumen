@@ -39,10 +39,7 @@ class Event
 
     private function loadEvent()
     {
-        //!! Anything Goes Wrong with the Api, Api response has Null or Something that cause an Error -> Template won't Rendering !!//
-        //!! So, I make new Array for store the data first !!//
         $api_event = $this->product->getWebUrlApi() . "segments?_sort=id&_order=desc&_start=0&_end=26&is_displayed=1";
-
         $api_event = $this->httpClient->get($api_event);
         $api_event = json_decode($api_event->getRawBody(), true);
         return $api_event;
@@ -51,21 +48,7 @@ class Event
     private function templateEvent()
     {
         $json = json_decode(file_get_contents(url('template/event.json')), true);
-
         $api_event = $this->loadEvent();
-
-        //!! ----------------------- Create new Array for Store the data -------------------------- !!//
-        // $data = [];
-        // $key = 0;
-        // foreach ($api_event as $value) {
-        //     if($value["link"] != "" && !is_null($value["link"])){
-        //         $data[$key]["imageUrl"] = $value["catalogs"][0]["image_large"];
-        //         $data[$key]["link"] = $value["link"];
-        //         $key++;
-        //     }
-        // }
-        //!! -------------------------------------------------------------------------------------- !!//
-
         $key = 0;
         foreach ($api_event as $value) {
             if ($value["link"] != "" && !is_null($value["link"])) {
@@ -75,7 +58,6 @@ class Event
                 $key++;
             }
         }
-
         return $json;
     }
 

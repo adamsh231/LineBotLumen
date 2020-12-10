@@ -1,5 +1,9 @@
 <?php
 
+//!! Anything Goes Wrong with the Api, Api response has Null or Something that cause an Error -> Template won't Rendering !!//
+//!! BEWARE OF IMAGE CAROUSEL BEHAVIOUR -> use Flex instead, its easy and custmoizable  !!//
+//!! So, I make new Array for store the data first !!//
+
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;

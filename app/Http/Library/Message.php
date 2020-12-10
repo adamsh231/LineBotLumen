@@ -24,9 +24,10 @@ class Message
         $multiMessageBuilder = new MultiMessageBuilder();
         foreach ($arr_text as $key => $value) {
             if ($value["type"] == "text") {
-                $messageBuilder[$key] = new TextMessageBuilder($value["text"]);
+                $text = $this->detectEmoji($value["text"]);
+                $messageBuilder[$key] = new TextMessageBuilder($text);
             } else {
-                //TODO: Define Soon!
+                //TODO: Define Soon! Sticker
             }
             $multiMessageBuilder->add($messageBuilder[$key]);
         }
@@ -39,14 +40,21 @@ class Message
 
     private function decodeEmoji($emoji)
     {
-        $code = str_replace('0x', '', $emoji);
+        $code = str_replace('0x', '', $emoji); //!! Improve with Regex if Possible !!//
         $bin = hex2bin(str_repeat('0', 8 - strlen($code)) . $code);
-        $emoticon =  mb_convert_encoding($bin, 'UTF-8', 'UTF-32BE');
-        return $emoticon;
+        $emoji =  mb_convert_encoding($bin, 'UTF-8', 'UTF-32BE');
+        return $emoji;
     }
 
     private function detectEmoji($text){
-        //TODO: Detect and Decode Emojis soon!
+        $split = explode(' ', $text);
+        foreach($split as $key => $value){
+            if(strpos($value, '0x')){
+                $split[$key] = $this->decodeEmoji($value);
+            }
+        }
+        $merged = implode($split);
+        return $merged;
     }
 
     //* ---------------------------------------------------------------------------------------------------------------- *//
