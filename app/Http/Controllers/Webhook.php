@@ -15,7 +15,7 @@ use App\Http\Library\QuickReply;
 use App\Http\Library\Product\ProductNewArrival;
 use App\Http\Library\Product\ProductDetailImage;
 use App\Http\Library\Product\ProductDetailImageColor;
-use App\Http\Library\Promo\PromoList;
+use App\Http\Library\Promo;
 
 class Webhook extends Controller
 {
@@ -76,7 +76,7 @@ class Webhook extends Controller
                 } else if ($event['message']['text'] == $command['info']) {
                     (new Message)->sendMessages($event, (new Text)->getInfoCommand());
                 } else if ($event['message']['text'] == $command['promo']) {
-                    (new PromoList)->loadTemplate($event);
+                    (new Promo)->loadTemplate($event);
                 } else {
                     (new QuickReply)->loadDefaultQuickReply($event, (new Text)->getFalseCommand()[0]["text"]);
                 }

@@ -1,22 +1,22 @@
 <?php
 
-namespace App\Http\Library\Promo;
+namespace App\Http\Library;
 
 use LINE\LINEBot;
 use LINE\LINEBot\HTTPClient\CurlHTTPClient;
 
-use App\Http\Library\Promo\Promo;
+use App\Http\Library\Product\Product;
 
-class PromoList
+class Promo
 {
-    private $promo;
+    private $product;
 
     public function __construct()
     {
         $this->httpClient = new CurlHTTPClient(getenv('CHANNEL_ACCESS_TOKEN'));
         $this->bot  = new LINEBot($this->httpClient, ['channelSecret' => getenv('CHANNEL_SECRET')]);
 
-        $this->promo = new Promo;
+        $this->product = new Product;
     }
 
     //* --------------------------------------- MODIFIER PUBLIC PROPERTY ----------------------------------------------- *//
@@ -40,7 +40,7 @@ class PromoList
     //* --------------------------------------- MODIFIER PRIVATE PROPERTY ---------------------------------------------- *//
     private function loadPromo()
     {
-        $api_promo = $this->promo->getWebUrlApi() . "promonew/query?is_active=1&is_displayed=1";
+        $api_promo = $this->product->getWebUrlApi() . "promonew/query?is_active=1&is_displayed=1";
         $api_promo = $this->httpClient->get($api_promo);
         $api_promo = json_decode($api_promo->getRawBody(), true);
         return $api_promo;
@@ -59,7 +59,7 @@ class PromoList
             $tanggal = $this->viewPeriodePromo($value["start"], $value["stop"]);
             $json["contents"][$key]["footer"]["contents"][1]["contents"][0]["contents"][1]["text"] = $tanggal;
 
-            $json["contents"][$key]["footer"]["contents"][1]["contents"][1]["contents"][0]["action"]["uri"] = $this->promo->getWebUrlOfficial() . "Promo/detail/" . $value["id"];
+            $json["contents"][$key]["footer"]["contents"][1]["contents"][1]["contents"][0]["action"]["uri"] = $this->product->getWebUrlOfficial() . "Promo/detail/" . $value["id"];
         }
         return $json;
     }
