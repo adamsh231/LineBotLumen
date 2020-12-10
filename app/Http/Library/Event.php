@@ -55,7 +55,7 @@ class Event
         $api_event = $this->loadEvent();
         foreach ($api_event as $key => $value) {
             $json["columns"][$key] = $json["columns"][0];
-            $json["columns"][$key]["imageUrl"] = $value["code"];
+            $json["columns"][$key]["imageUrl"] = $value["image_square"];
             $json["columns"][$key]["action"]["label"] = "xxxx";
             //TODO: Coba ganti label dengan promo!!
         }
