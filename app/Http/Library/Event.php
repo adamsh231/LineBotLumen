@@ -55,12 +55,12 @@ class Event
         foreach ($api_event as $key => $value) {
             $json["columns"][0] = $json["columns"][0];
             $json["columns"][0]["action"]["uri"] = "https://mekiliar.com?key=".$value["color"]["name"];
-            if ($value["link"] != "") {
+            // if ($value["link"] != "") {
                 // $json["columns"][$key] = $json["columns"][0];
                 // $json["columns"][$key]["imageUrl"] = $value["catalogs"][0]["image_large"];
                 // $json["columns"][$key]["action"]["label"] = $value["name"];
                 // $json["columns"][$key]["action"]["uri"] = $value["link"];
-            }
+            // }
         }
         return $json;
     }
