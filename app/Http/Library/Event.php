@@ -56,7 +56,7 @@ class Event
         foreach ($api_event as $key => $value) {
             $json["columns"][$key] = $json["columns"][0];
             $json["columns"][$key]["imageUrl"] = $value["image_square"];
-            $json["columns"][$key]["action"]["label"] = substr($value["code"], 0, 10);
+            $json["columns"][$key]["action"]["label"] = substr($value["code"], 0, 18);
             //TODO: Coba ganti label dengan promo!!
         }
         return $json;
