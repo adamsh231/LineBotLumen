@@ -54,7 +54,7 @@ class Message
                 $split[$key] = $this->decodeEmoji($value);
             }
         }
-        $merged = implode(" ",$split);
+        $merged = implode(' ',$split);
         return $merged;
     }
 
