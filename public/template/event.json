@@ -8,6 +8,22 @@
                 "label": "View detail",
                 "uri": "http://example.com/page/222"
             }
+        },
+        {
+            "imageUrl": "https://example.com/bot/images/item2.jpg",
+            "action": {
+                "type": "uri",
+                "label": "View detail",
+                "uri": "http://example.com/page/222"
+            }
+        },
+        {
+            "imageUrl": "https://example.com/bot/images/item2.jpg",
+            "action": {
+                "type": "uri",
+                "label": "View detail",
+                "uri": "http://example.com/page/222"
+            }
         }
     ]
 }
