@@ -14,7 +14,7 @@ class Event
     }
 
     //* --------------------------------------- MODIFIER PUBLIC PROPERTY ----------------------------------------------- *//
-    public function loadTemplate($event, $id)
+    public function loadTemplate($event)
     {
         $json = json_decode(file_get_contents(url('template/event.json')), true);
 
