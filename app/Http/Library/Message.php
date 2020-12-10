@@ -24,8 +24,7 @@ class Message
         $multiMessageBuilder = new MultiMessageBuilder();
         foreach ($arr_text as $key => $value) {
             if ($value["type"] == "text") {
-                $text = $this->detectEmoji($value["text"]);
-                $messageBuilder[$key] = new TextMessageBuilder($text);
+                $messageBuilder[$key] = new TextMessageBuilder($value["text"]);
             } else {
                 //TODO: Define Soon! Sticker
             }
@@ -48,14 +47,7 @@ class Message
 
     private function detectEmoji($text)
     {
-        $split = explode(' ', $text);
-        foreach ($split as $key => $value) {
-            if ($value[0] == '0' && $value[1] == 'x') {
-                $split[$key] = $this->decodeEmoji($value);
-            }
-        }
-        $merged = implode(' ',$split);
-        return $merged;
+        //TODO: Detect Emoji!!
     }
 
     //* ---------------------------------------------------------------------------------------------------------------- *//
