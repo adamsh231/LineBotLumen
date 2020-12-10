@@ -48,7 +48,7 @@ class Event
     private function templateEvent()
     {
         $json = json_decode(file_get_contents(url('template/event.json')), true);
-        $json["columns"][0]["imageUrl"] = "https://mekiliar.com";
+        $json["columns"][0]["action"]["uri"] = "https://mekiliar.com";
         // $api_event = $this->loadEvent();
         // $key = 0;
         // foreach ($api_event as $value) {
