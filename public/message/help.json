@@ -1,6 +1,6 @@
 [
     {
         "type": "text",
-        "text": "Command List\n􀁬 '!help' : Melihat list command\n􀁷 '!info' : Informasi Tentang Shoesmart\n􀀭 '!new'  : Menampilkan Produk New Arrival\n􀁵 '!promo': Menampilkan Promo Terbaru\n􀁮 '!event': Menampilkan Event saat ini"
+        "text": "􀁬 !help : Melihat list command\n􀁷 !info : Informasi Tentang Shoesmart\n􀀭 !new : Menampilkan Produk New Arrival\n􀁵 !promo : Menampilkan Promo Terbaru\n􀁮 !event : Menampilkan Event saat ini"
     }
 ]

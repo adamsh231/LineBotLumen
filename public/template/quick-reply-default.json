@@ -2,6 +2,7 @@
     "items": [
         {
             "type": "action",
+            "imageUrl": "https://example.com/sushi.png",
             "action": {
                 "type": "message",
                 "label": "help",
@@ -11,6 +12,7 @@
 
         {
             "type": "action",
+            "imageUrl": "https://image.flaticon.com/icons/png/512/58/58261.png",
             "action": {
                 "type": "message",
                 "label": "Promo",
