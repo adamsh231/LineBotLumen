@@ -2,17 +2,17 @@
     "items": [
         {
             "type": "action",
-            "imageUrl": "https://image.freepik.com/free-icon/information-logotype-circle_318-9441.jpg",
+            "imageUrl": "https://image.flaticon.com/icons/png/512/129/129581.png",
             "action": {
                 "type": "message",
-                "label": "help",
+                "label": "Bantuan",
                 "text": "!help"
             }
         },
 
         {
             "type": "action",
-            "imageUrl": "https://image.flaticon.com/icons/png/512/58/58261.png",
+            "imageUrl": "https://image.freepik.com/free-photo/red-purchase-bag_1156-127.jpg",
             "action": {
                 "type": "message",
                 "label": "Promo",
@@ -21,6 +21,7 @@
         },
         {
             "type": "action",
+            "imageUrl": "https://image.freepik.com/free-vector/shopping_24908-54102.jpg",
             "action": {
                 "type": "message",
                 "label": "New Arrival",
@@ -29,6 +30,7 @@
         },
         {
             "type": "action",
+            "imageUrl": "https://image.freepik.com/free-vector/joystick-game-sport-technology_138676-2045.jpg",
             "action": {
                 "type": "message",
                 "label": "Event",
@@ -37,6 +39,7 @@
         },
         {
             "type": "action",
+            "imageUrl": "https://image.freepik.com/free-icon/information-logotype-circle_318-9441.jpg",
             "action": {
                 "type": "message",
                 "label": "Informasi",
