@@ -1,0 +1,6 @@
+[
+    {
+        "type": "text",
+        "text": "Command List'!help' : Melihat list command \n '!info' : Informasi Tentang Shoesmart \n '!new'  : Menampilkan Produk New Arrival \n '!promo': Menampilkan Promo Terbaru"
+    }
+]
