@@ -2,7 +2,7 @@
     "items": [
         {
             "type": "action",
-            "imageUrl": "https://example.com/sushi.png",
+            "imageUrl": "https://image.freepik.com/free-icon/information-logotype-circle_318-9441.jpg",
             "action": {
                 "type": "message",
                 "label": "help",
