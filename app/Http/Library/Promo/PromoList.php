@@ -28,9 +28,9 @@ class PromoList
             'replyToken' => $event['replyToken'],
             'messages'   => [
                 [
-                    'type'     => 'template',
+                    'type'     => 'flex',
                     'altText'  => 'List Promo',
-                    'template' => $json
+                    'contents' => $json
                 ]
             ],
         ]);

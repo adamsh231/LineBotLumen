@@ -1,63 +1,101 @@
 {
     "type": "carousel",
-    "columns": [
+    "contents": [
         {
-            "thumbnailImageUrl": "https://example.com/bot/images/item1.jpg",
-            "imageBackgroundColor": "#FFFFFF",
-            "title": "this is menu",
-            "text": "description",
-            "defaultAction": {
-                "type": "uri",
-                "label": "View detail",
-                "uri": "http://example.com/page/123"
+            "type": "bubble",
+            "hero": {
+                "type": "image",
+                "url": "https://scdn.line-apps.com/n/channel_devcenter/img/fx/01_1_cafe.png",
+                "size": "full",
+                "aspectRatio": "400:400",
+                "aspectMode": "cover"
             },
-            "actions": [
-                {
-                    "type": "postback",
-                    "label": "Buy",
-                    "data": "action=buy&itemid=111"
-                },
-                {
-                    "type": "postback",
-                    "label": "Add to cart",
-                    "data": "action=add&itemid=111"
-                },
-                {
-                    "type": "uri",
-                    "label": "View detail",
-                    "uri": "http://example.com/page/111"
-                }
-            ]
+            "body": {
+                "type": "box",
+                "layout": "vertical",
+                "contents": [
+                    {
+                        "type": "text",
+                        "text": "Welccoming Asaethnic",
+                        "align": "center",
+                        "size": "lg",
+                        "weight": "bold"
+                    },
+                    {
+                        "type": "text",
+                        "text": "Extra potongan harga Rp 50.000 minimum pembelian Rp 200.000.",
+                        "wrap": true,
+                        "align": "center",
+                        "margin": "sm",
+                        "size": "md"
+                    }
+                ]
+            },
+            "footer": {
+                "type": "box",
+                "layout": "vertical",
+                "contents": [
+                    {
+                        "type": "separator"
+                    },
+                    {
+                        "type": "box",
+                        "layout": "horizontal",
+                        "contents": [
+                            {
+                                "type": "box",
+                                "layout": "vertical",
+                                "contents": [
+                                    {
+                                        "type": "text",
+                                        "text": "Promo periode",
+                                        "color": "#898989",
+                                        "size": "xs"
+                                    },
+                                    {
+                                        "type": "text",
+                                        "text": "06 - 11 December 2020",
+                                        "size": "xxs"
+                                    }
+                                ],
+                                "paddingTop": "md"
+                            },
+                            {
+                                "type": "box",
+                                "layout": "horizontal",
+                                "contents": [
+                                    {
+                                        "type": "button",
+                                        "action": {
+                                            "type": "postback",
+                                            "label": "Lihat Promo",
+                                            "data": "hello",
+                                            "displayText": "Promo Welcoming Kluikui"
+                                        },
+                                        "style": "primary",
+                                        "height": "sm",
+                                        "margin": "xxl",
+                                        "offsetTop": "none",
+                                        "color": "#A88F00"
+                                    }
+                                ],
+                                "paddingAll": "none",
+                                "margin": "none",
+                                "paddingTop": "md",
+                                "paddingEnd": "none"
+                            }
+                        ]
+                    }
+                ]
+            }
         },
         {
-            "thumbnailImageUrl": "https://example.com/bot/images/item2.jpg",
-            "imageBackgroundColor": "#000000",
-            "title": "this is menu",
-            "text": "description",
-            "defaultAction": {
-                "type": "uri",
-                "label": "View detail",
-                "uri": "http://example.com/page/222"
-            },
-            "actions": [
-                {
-                    "type": "postback",
-                    "label": "Buy",
-                    "data": "action=buy&itemid=222"
-                },
-                {
-                    "type": "postback",
-                    "label": "Add to cart",
-                    "data": "action=add&itemid=222"
-                },
-                {
-                    "type": "uri",
-                    "label": "View detail",
-                    "uri": "http://example.com/page/222"
-                }
-            ]
+            "type": "bubble",
+            "body": {
+                "type": "box",
+                "layout": "vertical",
+                "contents": []
+            }
         }
-    ],
-    "imageAspectRatio": "rectangle",
-    "imageSize": "cover"
+    ]
 }
