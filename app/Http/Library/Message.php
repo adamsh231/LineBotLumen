@@ -18,7 +18,7 @@ class Message
 
     //* --------------------------------------- MODIFIER PUBLIC PROPERTY ----------------------------------------------- *//
 
-    public function sendMessage($event, $arr_text)
+    public function sendMessages($event, $arr_text)
     {
         $messageBuilder = [];
         $multiMessageBuilder = new MultiMessageBuilder();
