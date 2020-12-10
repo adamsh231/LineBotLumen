@@ -1,0 +1,36 @@
+{
+    "items": [
+        {
+            "type": "action",
+            "action": {
+                "type": "message",
+                "label": "help",
+                "text": "!help"
+            }
+        },
+        {
+            "type": "action",
+            "action": {
+                "type": "message",
+                "label": "Informasi",
+                "text": "!info"
+            }
+        },
+        {
+            "type": "action",
+            "action": {
+                "type": "message",
+                "label": "Promo",
+                "text": "!promo"
+            }
+        },
+        {
+            "type": "action",
+            "action": {
+                "type": "message",
+                "label": "New Arrival",
+                "text": "!new"
+            }
+        }
+    ]
+}

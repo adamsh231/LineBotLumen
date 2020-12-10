@@ -39,7 +39,7 @@ class Webhook extends Controller
         $this->data = $request->all();
 
         // ------------ Register If Not Registered ------------- //
-        $this->user->registerUser($this->data['events'][0]); //TODO: Why event is an array? | Change follow event soon!
+        $this->user->registerUser($this->data['events'][0]); //TODO: Event is an array | Change follow event soon!
         // ----------------------------------------------------- //
     }
 
@@ -78,7 +78,7 @@ class Webhook extends Controller
                     (new Message)->sendMessage($event, (new Text)->getFalseCommand());
                 }
             } else {
-                (new QuickReply)->loadQuickReply($event);
+                (new QuickReply)->loadDefaultQuickReply($event, (new Text)->getFalseCommand()[0]["text"]);
             }
         } else {
             //TODO: reply user if not text message
