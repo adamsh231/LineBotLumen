@@ -8,14 +8,7 @@
                 "text": "!help"
             }
         },
-        {
-            "type": "action",
-            "action": {
-                "type": "message",
-                "label": "Informasi",
-                "text": "!info"
-            }
-        },
+
         {
             "type": "action",
             "action": {
@@ -30,6 +23,22 @@
                 "type": "message",
                 "label": "New Arrival",
                 "text": "!new"
+            }
+        },
+        {
+            "type": "action",
+            "action": {
+                "type": "message",
+                "label": "Event",
+                "text": "!event"
+            }
+        },
+        {
+            "type": "action",
+            "action": {
+                "type": "message",
+                "label": "Informasi",
+                "text": "!info"
             }
         }
     ]
