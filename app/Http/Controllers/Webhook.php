@@ -27,22 +27,20 @@ class Webhook extends Controller
     private $user;
     private $data;
 
-    public function __construct()
+    public function __construct(Request $request, Response $response)
     {
         $this->httpClient = new CurlHTTPClient(getenv('CHANNEL_ACCESS_TOKEN'));
         $this->bot  = new LINEBot($this->httpClient, ['channelSecret' => getenv('CHANNEL_SECRET')]);
 
-        $this->request = new Request;
-        $this->response = new Response;
+        $this->request = $request;
+        $this->response = $response;
         $this->user = new User;
         $this->command = new Command;
 
         $this->data = $this->request->all();
 
         // ------------ Register If Not Registered ------------- //
-        // foreach ($this->data['events'] as $event) {
-        //     if(isset($event['source']['userId'])) $this->user->registerUser($event);
-        // }
+        $this->registerUser($this->data);
         // ----------------------------------------------------- //
     }
 
@@ -98,6 +96,12 @@ class Webhook extends Controller
             (new ProductDetailImage)->loadTemplate($event, $event_command['data']);
         } else if ($event_command['command'] == $command['detail_image_color']) {
             (new ProductDetailImageColor)->loadTemplate($event, $event_command['data'], $event_command[2]);
+        }
+    }
+
+    private function registerUser($data){
+        foreach ($data['events'] as $event) {
+            if(isset($event['source']['userId'])) $this->user->registerUser($event);
         }
     }
     //* ---------------------------------------------------------------------------------------------------------- *//
