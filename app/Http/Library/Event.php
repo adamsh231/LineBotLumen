@@ -48,17 +48,17 @@ class Event
     private function templateEvent()
     {
         $json = json_decode(file_get_contents(url('template/event.json')), true);
-        $api_event = $this->loadEvent();
-        $key = 0;
-        foreach ($api_event as $value) {
-            if ($value["link"] != "") {
-                $json["columns"][$key] = $json["columns"][0];
-                $json["columns"][$key]["imageUrl"] = $value["catalogs"][0]["image_large"];
-                $json["columns"][$key]["action"]["label"] = $value["name"];
-                $json["columns"][$key]["action"]["uri"] = $value["link"];
-                $key++;
-            }
-        }
+        // $api_event = $this->loadEvent();
+        // $key = 0;
+        // foreach ($api_event as $value) {
+        //     if ($value["link"] != "") {
+        //         $json["columns"][$key] = $json["columns"][0];
+        //         $json["columns"][$key]["imageUrl"] = $value["catalogs"][0]["image_large"];
+        //         $json["columns"][$key]["action"]["label"] = $value["name"];
+        //         $json["columns"][$key]["action"]["uri"] = $value["link"];
+        //         $key++;
+        //     }
+        // }
         return $json;
     }
 
