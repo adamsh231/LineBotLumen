@@ -68,7 +68,7 @@
                                         "type": "button",
                                         "action": {
                                             "type": "uri",
-                                            "label": "action",
+                                            "label": "Lihat Promo",
                                             "uri": "http://linecorp.com/"
                                         },
                                         "style": "primary",
