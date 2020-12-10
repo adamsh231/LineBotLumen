@@ -50,17 +50,15 @@ class Event
         $json = json_decode(file_get_contents(url('template/event.json')), true);
 
         $api_event = $this->loadEvent();
-        $key = 0;
-        foreach ($api_event as $value) {
+        foreach ($api_event as $key => $value) {
             $json["columns"][0] = $json["columns"][0];
-            $json["columns"][0]["action"]["uri"] = "https://mekiliar.com".$value["name"];
+            $json["columns"][0]["action"]["uri"] = "https://mekiliar.com?key=".$key;
             if ($value["link"] != "") {
                 // $json["columns"][$key] = $json["columns"][0];
                 // $json["columns"][$key]["imageUrl"] = $value["catalogs"][0]["image_large"];
                 // $json["columns"][$key]["action"]["label"] = $value["name"];
                 // $json["columns"][$key]["action"]["uri"] = $value["link"];
             }
-            $key++;
         }
         return $json;
     }
