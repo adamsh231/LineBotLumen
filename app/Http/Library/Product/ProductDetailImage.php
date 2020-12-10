@@ -33,7 +33,7 @@ class ProductDetailImage
             'messages'   => [
                 [
                     'type'     => 'template',
-                    'altText'  => 'Product Detail',
+                    'altText'  => 'Detail Product',
                     'template' => $json
                 ]
             ],

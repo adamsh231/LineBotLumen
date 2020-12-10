@@ -9,6 +9,7 @@ class Command
         "new_arrival" => "!new",
         "help" => "!help",
         "info" => "!info",
+        "promo" => "!promo",
 
         // ---- Only Postback ----- //
         "detail_image" => "!image",
