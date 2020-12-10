@@ -40,7 +40,9 @@ class Webhook extends Controller
         $this->data = $this->request->all();
 
         // ------------ Register If Not Registered ------------- //
-        $this->user->registerUser($this->data['events'][0]); //TODO: Event is an array | Change follow event soon!
+        foreach ($this->data['events'] as $event) {
+            if(isset($event['source']['userId'])) $this->user->registerUser($event);
+        }
         // ----------------------------------------------------- //
     }
 
