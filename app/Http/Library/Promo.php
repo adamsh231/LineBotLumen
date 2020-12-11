@@ -40,7 +40,8 @@ class Promo
     //* --------------------------------------- MODIFIER PRIVATE PROPERTY ---------------------------------------------- *//
     private function loadPromo()
     {
-        $api_promo = $this->product->getWebUrlApi() . "promonew/query?is_active=1&is_displayed=1";
+        //!! Warning !! flex message carousel max? !!//
+        $api_promo = $this->product->getWebUrlApi() . "promonew/query?_order=id&_sort=desc&_is_paginate=0&_paginate=100&page=&is_active=1&is_displayed=1";
         $api_promo = $this->httpClient->get($api_promo);
         $api_promo = json_decode($api_promo->getRawBody(), true);
         return $api_promo;
