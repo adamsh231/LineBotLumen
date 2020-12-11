@@ -1,0 +1,75 @@
+{
+    "type": "bubble",
+    "size": "mega",
+    "header": {
+        "type": "box",
+        "layout": "vertical",
+        "contents": [
+            {
+                "type": "image",
+                "url": "https://www.shoesmart.co.id/assets/images/logo2.png",
+                "size": "xs",
+                "aspectRatio": "400:500",
+                "aspectMode": "cover"
+            },
+            {
+                "type": "text",
+                "text": "SHOESMART",
+                "color": "#AA8F00",
+                "weight": "bold",
+                "margin": "md"
+            },
+            {
+                "type": "separator",
+                "margin": "lg"
+            }
+        ],
+        "alignItems": "center",
+        "margin": "none",
+        "paddingAll": "none",
+        "paddingTop": "lg",
+        "paddingBottom": "lg"
+    },
+    "body": {
+        "type": "box",
+        "layout": "vertical",
+        "contents": [
+            {
+                "type": "text",
+                "text": "Shoesmart adalah Start up E-commerce khusus sepatu wanita dan pria yang didirikan pada 2016. Kami hadir sebagai jawaban atas tantangan dunia teknologi yang semakin maju, termasuk dalam hal berbelanja secara online. Sebagai platform online yang mempertemukan antara pebisnis sepatu lokal dan para pembelinya, Shoesmart menyediakan berbagai macam produk sepatu terkini berkualitas dengan harga terjangkau keluaran berbagai brand lokal terbaik di Indonesia.",
+                "wrap": true,
+                "align": "center",
+                "size": "xs"
+            }
+        ]
+    },
+    "footer": {
+        "type": "box",
+        "layout": "vertical",
+        "contents": [
+            {
+                "type": "separator"
+            },
+            {
+                "type": "button",
+                "action": {
+                    "type": "uri",
+                    "label": "Informasi Selengkapnya",
+                    "uri": "https://www.shoesmart.co.id/about_us"
+                },
+                "style": "primary",
+                "color": "#AA8F00",
+                "height": "sm",
+                "margin": "md"
+            }
+        ]
+    },
+    "styles": {
+        "header": {
+            "separator": true
+        },
+        "hero": {
+            "separator": true
+        }
+    }
+}

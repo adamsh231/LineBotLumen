@@ -1,8 +1,9 @@
 <?php
 
-//!! Anything Goes Wrong with the Api, Api response has Null or Something that cause an Error -> Template won't Rendering !!//
-//!! BEWARE OF IMAGE CAROUSEL BEHAVIOUR -> use Flex instead, its easy and custmoizable  !!//
-//!! So, I make new Array for store the data first !!//
+//!! 1 -> Anything Goes Wrong with the Api, Api response has Null or Something that cause an Error -> Template won't Rendering !!//
+//!! 1 ->  BEWARE OF IMAGE CAROUSEL BEHAVIOUR -> use Flex instead, its easy and custmoizable  !!//
+//!! 1 ->  So, I make new Array for store the data first !!//
+//TODO: Use builder instead of json file //
 
 namespace App\Http\Controllers;
 
@@ -21,6 +22,7 @@ use App\Http\Library\Product\ProductDetailImage;
 use App\Http\Library\Product\ProductDetailImageColor;
 use App\Http\Library\Promo;
 use App\Http\Library\Event;
+use App\Http\Library\Info;
 
 class Webhook extends Controller
 {
@@ -73,25 +75,31 @@ class Webhook extends Controller
     {
         $command = $this->command->getCommand();
         if ($event['message']['type'] == 'text') {
-            if ($this->command->isCommand($event['message']['text'])) {
-                if ($event['message']['text'] == $command['new_arrival']) {
-                    (new ProductNewArrival)->loadTemplate($event);
-                } else if ($event['message']['text'] == $command['help']) {
-                    (new Message)->sendMessages($event, (new Text)->getHelpCommand());
-                } else if ($event['message']['text'] == $command['info']) {
-                    (new Message)->sendMessages($event, (new Text)->getInfoCommand());
-                } else if ($event['message']['text'] == $command['promo']) {
-                    (new Promo)->loadTemplate($event);
-                } else if ($event['message']['text'] == $command['event']) {
-                    (new Event)->loadTemplate($event);
-                } else {
-                    (new QuickReply)->loadDefaultQuickReply($event, (new Text)->getFalseCommand()[0]["text"]);
-                }
-            } else {
-                (new QuickReply)->loadDefaultQuickReply($event, (new Text)->getFalseCommand()[0]["text"]);
-            }
+            $this->replyMessageTextCondition($event);
         } else {
             //TODO: reply user if not text message
+        }
+    }
+
+    private function replyMessageTextCondition($event){
+        switch ($event['message']['text']) {
+            case $this->command['new_arrival']:
+                (new ProductNewArrival)->loadTemplate($event);
+                break;
+            case $this->command['help']:
+                (new Message)->sendMessages($event, (new Text)->getHelpCommand());
+                break;
+            case $this->command['info']:
+                (new Info)->loadTemplate($event);
+                break;
+            case $this->command['promo']:
+                (new Promo)->loadTemplate($event);
+                break;
+            case $this->command['event']:
+                (new Event)->loadTemplate($event);
+                break;
+            default:
+                (new QuickReply)->loadDefaultQuickReply($event, (new Text)->getFalseCommand()[0]["text"]);
         }
     }
 
@@ -106,10 +114,11 @@ class Webhook extends Controller
         }
     }
 
-    private function registerUser($data){
+    private function registerUser($data)
+    {
         //TODO: cant get display name -> if blocked
         foreach ($data['events'] as $event) {
-            if(isset($event['source']['userId'])) $this->user->registerUser($event);
+            if (isset($event['source']['userId'])) $this->user->registerUser($event);
         }
     }
     //* ---------------------------------------------------------------------------------------------------------- *//
