@@ -3,6 +3,7 @@
 //!! 1 -> Anything Goes Wrong with the Api, Api response has Null or Something that cause an Error -> Template won't Rendering !!//
 //!! 1 ->  BEWARE OF IMAGE CAROUSEL BEHAVIOUR -> use Flex instead, its easy and custmoizable  !!//
 //!! 1 ->  So, I make new Array for store the data first !!//
+//!! 2 ->  Replace URL white space to %20 !!//
 //TODO: Use builder instead of json file //
 
 namespace App\Http\Controllers;

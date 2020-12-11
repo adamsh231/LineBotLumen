@@ -52,9 +52,10 @@ class Category
         $api_category = $this->loadCategory();
 
         foreach ($api_category as $key => $value) {
+            $urlName = str_replace(' ', '%20', $value["name"]);
             $json["contents"][$key] = $json["contents"][0];
             $json["contents"][$key]["body"]["contents"][0]["url"] = $value["icon_url"];
-            $json["contents"][$key]["body"]["contents"][0]["action"]["uri"] = $this->product->getWebUrlOfficial() . "products?categories=" . 2 . "_" . "je mbut";
+            $json["contents"][$key]["body"]["contents"][0]["action"]["uri"] = $this->product->getWebUrlOfficial() . "products?categories=" . $value["id"] . "_" . $urlName;
         }
 
         return $json;
