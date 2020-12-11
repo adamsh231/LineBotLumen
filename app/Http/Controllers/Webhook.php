@@ -11,8 +11,6 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use Illuminate\Http\Response;
-use LINE\LINEBot;
-use LINE\LINEBot\HTTPClient\CurlHTTPClient;
 
 use App\Http\Library\User;
 use App\Http\Library\Command;
@@ -40,11 +38,9 @@ class Webhook extends Controller
 
     public function __construct(Request $request, Response $response)
     {
-        $this->httpClient = new CurlHTTPClient(getenv('CHANNEL_ACCESS_TOKEN'));
-        $this->bot  = new LINEBot($this->httpClient, ['channelSecret' => getenv('CHANNEL_SECRET')]);
-
         $this->request = $request;
         $this->response = $response;
+
         $this->user = new User;
         $this->command = new Command;
 
