@@ -51,11 +51,14 @@ class Category
         $json = json_decode(file_get_contents(url('template/category.json')), true);
         $api_category = $this->loadCategory();
 
-        foreach ($api_category as $key => $value) {
+        $key = 0;
+        foreach ($api_category as $value) {
+            if($value["name"] == "Kids") continue;
             $urlName = str_replace(' ', '%20', $value["name"]);
             $json["contents"][$key] = $json["contents"][0];
             $json["contents"][$key]["body"]["contents"][0]["url"] = $value["icon_url"];
             $json["contents"][$key]["body"]["contents"][0]["action"]["uri"] = $this->product->getWebUrlOfficial() . "products?categories=" . $value["id"] . "_" . $urlName;
+            $key++;
         }
 
         return $json;

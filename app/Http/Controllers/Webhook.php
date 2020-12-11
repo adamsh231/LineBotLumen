@@ -4,6 +4,7 @@
 //!! 1 ->  BEWARE OF IMAGE CAROUSEL BEHAVIOUR -> use Flex instead, its easy and custmoizable  !!//
 //!! 1 ->  So, I make new Array for store the data first !!//
 //!! 2 ->  Replace URL white space to %20 !!//
+//!! 3 ->  Beware!, when modify template if there is any condition foreach -> {key} => value should be split !!//
 //TODO: Use builder instead of json file //
 
 namespace App\Http\Controllers;
