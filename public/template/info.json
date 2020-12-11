@@ -41,7 +41,9 @@
                 "align": "center",
                 "size": "xs"
             }
-        ]
+        ],
+        "paddingTop": "none",
+        "paddingBottom": "none"
     },
     "footer": {
         "type": "box",
