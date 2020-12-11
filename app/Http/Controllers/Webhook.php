@@ -73,7 +73,6 @@ class Webhook extends Controller
     //* ----------------------------------------- PRIVATE METHOD ------------------------------------------------- *//
     private function replyMessage($event)
     {
-        $command = $this->command->getCommand();
         if ($event['message']['type'] == 'text') {
             $this->replyMessageTextCondition($event);
         } else {
@@ -82,6 +81,7 @@ class Webhook extends Controller
     }
 
     private function replyMessageTextCondition($event){
+        $command = $this->command->getCommand();
         switch ($event['message']['text']) {
             case $this->command['new_arrival']:
                 (new ProductNewArrival)->loadTemplate($event);
