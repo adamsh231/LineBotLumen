@@ -83,19 +83,19 @@ class Webhook extends Controller
     private function replyMessageTextCondition($event){
         $command = $this->command->getCommand();
         switch ($event['message']['text']) {
-            case $this->command['new_arrival']:
+            case $command['new_arrival']:
                 (new ProductNewArrival)->loadTemplate($event);
                 break;
-            case $this->command['help']:
+            case $command['help']:
                 (new Message)->sendMessages($event, (new Text)->getHelpCommand());
                 break;
-            case $this->command['info']:
+            case $command['info']:
                 (new Info)->loadTemplate($event);
                 break;
-            case $this->command['promo']:
+            case $command['promo']:
                 (new Promo)->loadTemplate($event);
                 break;
-            case $this->command['event']:
+            case $command['event']:
                 (new Event)->loadTemplate($event);
                 break;
             default:
