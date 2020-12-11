@@ -1,0 +1,63 @@
+{
+    "type": "bubble",
+    "size": "giga",
+    "header": {
+        "type": "box",
+        "layout": "vertical",
+        "contents": [
+            {
+                "type": "text",
+                "text": "99+ Brand Asli Indonesia",
+                "align": "center",
+                "weight": "bold",
+                "color": "#AA8F00",
+                "size": "lg"
+            },
+            {
+                "type": "separator",
+                "margin": "md"
+            }
+        ],
+        "paddingBottom": "xs"
+    },
+    "body": {
+        "type": "box",
+        "layout": "horizontal",
+        "contents": [
+            {
+                "type": "image",
+                "url": "https://api.shoesmart.co.id/1605513110749.png",
+                "aspectMode": "cover",
+                "size": "full",
+                "aspectRatio": "200:100"
+            }
+        ],
+        "paddingAll": "none",
+        "paddingBottom": "md",
+        "margin": "none",
+        "paddingTop": "md"
+    },
+    "footer": {
+        "type": "box",
+        "layout": "vertical",
+        "contents": [
+            {
+                "type": "separator"
+            },
+            {
+                "type": "text",
+                "text": "Selengkapnya",
+                "margin": "md",
+                "size": "xs",
+                "action": {
+                    "type": "uri",
+                    "label": "action",
+                    "uri": "https://www.shoesmart.co.id/brands"
+                },
+                "color": "#898989"
+            }
+        ],
+        "margin": "none",
+        "alignItems": "center"
+    }
+}

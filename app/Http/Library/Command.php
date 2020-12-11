@@ -11,6 +11,8 @@ class Command
         "info" => "!info",
         "promo" => "!promo",
         "event" => "!event",
+        "brand" => "!brand",
+        "category" => "!category",
 
         // ---- Only Postback ----- //
         "detail_image" => "!image",

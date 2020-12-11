@@ -30,6 +30,24 @@
         },
         {
             "type": "action",
+            "imageUrl": "https://image.freepik.com/free-vector/shoes-realistic-set_1284-23172.jpg",
+            "action": {
+                "type": "message",
+                "label": "Merek",
+                "text": "!brand"
+            }
+        },
+        {
+            "type": "action",
+            "imageUrl": "https://image.flaticon.com/icons/png/512/123/123426.png",
+            "action": {
+                "type": "message",
+                "label": "Kategori",
+                "text": "!category"
+            }
+        },
+        {
+            "type": "action",
             "imageUrl": "https://image.freepik.com/free-vector/joystick-game-sport-technology_138676-2045.jpg",
             "action": {
                 "type": "message",
