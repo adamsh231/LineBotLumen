@@ -13,6 +13,8 @@ class ProductNewArrival{
     private $product;
     private $command;
 
+    //TODO: buat API nya
+
     private $NEW_ARRIVAL = "[5694,5297,5336,5308,5188,4507,5015,4891,5063,5027,5122,5149]";
 
     public function __construct()
@@ -63,6 +65,7 @@ class ProductNewArrival{
         $api_product = $this->loadProduct();
         $no_images = "https://perdamsi.or.id/theme/perdamsi/images/no-preview.jpg?dadead2ca4";
         foreach ($api_product as $key => $value) {
+            if($key >= 12) break; //!! Max Bubble -> Kilo size
             $json["contents"][$key] = $json["contents"][0];
             $json["contents"][$key]["hero"]["url"] = !isset($value["image_url"]) ?  $no_images : $value["image_url"];
             $json["contents"][$key]["hero"]["action"]["data"] = $command_postback_image ."=". $value["id"];

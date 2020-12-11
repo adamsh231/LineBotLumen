@@ -51,7 +51,7 @@ class Promo
         $json = json_decode(file_get_contents(url('template/promo-list.json')), true);
         $api_promo = $this->loadPromo();
         foreach ($api_promo as $key => $value) {
-            if($key >= 12) break;
+            if($key >= 12) break; //!! Max Bubble -> Kilo size
             $json["contents"][$key] = $json["contents"][0];
             $json["contents"][$key]["hero"]["url"] = $value["image_square"];
             $json["contents"][$key]["body"]["contents"][0]["text"] = $value["name"];
