@@ -1,112 +1,112 @@
 {
     "type": "carousel",
     "contents": [
-      {
-        "type": "bubble",
-        "size": "kilo",
-        "direction": "ltr",
-        "hero": {
-          "type": "image",
-          "url": "https://scdn.line-apps.com/n/channel_devcenter/img/flexsnapshot/clip/clip10.jpg",
-          "size": "full",
-          "aspectMode": "cover",
-          "aspectRatio": "170:210",
-          "action": {
-            "type": "postback",
-            "label": "action",
-            "data": "hello",
-            "displayText": "Product Name"
-          }
-        },
-        "body": {
-          "type": "box",
-          "layout": "vertical",
-          "contents": [
-            {
-              "type": "text",
-              "text": "Product Name",
-              "weight": "bold",
-              "size": "md",
-              "wrap": false,
-              "color": "#A88F00",
-              "margin": "none"
-            },
-            {
-              "type": "box",
-              "layout": "vertical",
-              "contents": [
-                {
-                  "type": "box",
-                  "layout": "baseline",
-                  "spacing": "sm",
-                  "contents": [
-                    {
-                      "type": "text",
-                      "text": "Brand Name",
-                      "wrap": true,
-                      "color": "#8c8c8c",
-                      "size": "xxs",
-                      "flex": 5
-                    }
-                  ],
-                  "margin": "none"
+        {
+            "type": "bubble",
+            "size": "mega",
+            "direction": "ltr",
+            "hero": {
+                "type": "image",
+                "url": "https://scdn.line-apps.com/n/channel_devcenter/img/flexsnapshot/clip/clip10.jpg",
+                "size": "full",
+                "aspectMode": "cover",
+                "aspectRatio": "170:210",
+                "action": {
+                    "type": "postback",
+                    "label": "action",
+                    "data": "hello",
+                    "displayText": "Product Name"
                 }
-              ]
             },
-            {
-              "type": "text",
-              "text": "Rp. 120.000",
-              "color": "#FFFFFF",
-              "weight": "regular",
-              "style": "normal",
-              "align": "end",
-              "size": "xxs",
-              "decoration": "line-through"
+            "body": {
+                "type": "box",
+                "layout": "vertical",
+                "contents": [
+                    {
+                        "type": "text",
+                        "text": "Product Name",
+                        "weight": "bold",
+                        "size": "md",
+                        "wrap": false,
+                        "color": "#A88F00",
+                        "margin": "none"
+                    },
+                    {
+                        "type": "box",
+                        "layout": "vertical",
+                        "contents": [
+                            {
+                                "type": "box",
+                                "layout": "baseline",
+                                "spacing": "sm",
+                                "contents": [
+                                    {
+                                        "type": "text",
+                                        "text": "Brand Name",
+                                        "wrap": true,
+                                        "color": "#8c8c8c",
+                                        "size": "xxs",
+                                        "flex": 5
+                                    }
+                                ],
+                                "margin": "none"
+                            }
+                        ]
+                    },
+                    {
+                        "type": "text",
+                        "text": "Rp. 120.000",
+                        "color": "#FFFFFF",
+                        "weight": "regular",
+                        "style": "normal",
+                        "align": "end",
+                        "size": "xxs",
+                        "decoration": "line-through"
+                    },
+                    {
+                        "type": "text",
+                        "text": "Rp. 90.000",
+                        "margin": "none",
+                        "size": "sm",
+                        "color": "#A88F00",
+                        "weight": "bold",
+                        "style": "normal",
+                        "align": "end"
+                    }
+                ],
+                "spacing": "sm",
+                "paddingAll": "13px"
             },
-            {
-              "type": "text",
-              "text": "Rp. 90.000",
-              "margin": "none",
-              "size": "sm",
-              "color": "#A88F00",
-              "weight": "bold",
-              "style": "normal",
-              "align": "end"
+            "footer": {
+                "type": "box",
+                "layout": "vertical",
+                "contents": [
+                    {
+                        "type": "separator",
+                        "margin": "xs"
+                    },
+                    {
+                        "type": "text",
+                        "text": "View",
+                        "contents": [],
+                        "align": "center",
+                        "margin": "md",
+                        "size": "sm",
+                        "color": "#808080",
+                        "weight": "regular"
+                    }
+                ],
+                "margin": "sm",
+                "alignItems": "center",
+                "spacing": "none",
+                "paddingTop": "sm",
+                "paddingBottom": "md",
+                "action": {
+                    "type": "uri",
+                    "label": "action",
+                    "uri": "http://linecorp.com/"
+                }
             }
-          ],
-          "spacing": "sm",
-          "paddingAll": "13px"
-        },
-        "footer": {
-          "type": "box",
-          "layout": "vertical",
-          "contents": [
-            {
-              "type": "separator",
-              "margin": "xs"
-            },
-            {
-              "type": "text",
-              "text": "View",
-              "contents": [],
-              "align": "center",
-              "margin": "md",
-              "size": "sm",
-              "color": "#808080",
-              "weight": "regular"
-            }
-          ],
-          "margin": "sm",
-          "alignItems": "center",
-          "spacing": "none",
-          "paddingTop": "sm",
-          "paddingBottom": "md",
-          "action": {
-            "type": "uri",
-            "label": "action",
-            "uri": "http://linecorp.com/"
-          }
         }
-      }
     ]
-  }
+}

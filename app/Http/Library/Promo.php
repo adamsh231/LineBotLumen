@@ -40,8 +40,7 @@ class Promo
     //* --------------------------------------- MODIFIER PRIVATE PROPERTY ---------------------------------------------- *//
     private function loadPromo()
     {
-        //!! Warning !! flex message carousel max? !!//
-        $api_promo = $this->product->getWebUrlApi() . "promonew/query?_order=id&_sort=desc&_is_paginate=0&_paginate=13&page=&is_active=1&is_displayed=1";
+        $api_promo = $this->product->getWebUrlApi() . "promonew/query?_order=id&_sort=desc&_is_paginate=0&_paginate=100&page=&is_active=1&is_displayed=1";
         $api_promo = $this->httpClient->get($api_promo);
         $api_promo = json_decode($api_promo->getRawBody(), true);
         return $api_promo;
@@ -52,6 +51,7 @@ class Promo
         $json = json_decode(file_get_contents(url('template/promo-list.json')), true);
         $api_promo = $this->loadPromo();
         foreach ($api_promo as $key => $value) {
+            if($key >= 10) break;
             $json["contents"][$key] = $json["contents"][0];
             $json["contents"][$key]["hero"]["url"] = $value["image_square"];
             $json["contents"][$key]["body"]["contents"][0]["text"] = $value["name"];
