@@ -54,7 +54,7 @@ class Category
         foreach ($api_category as $key => $value) {
             $json["contents"][$key] = $json["contents"][0];
             $json["contents"][$key]["body"]["contents"][0]["url"] = $value["icon_url"];
-            $json["contents"][$key]["body"]["contents"][0]["action"]["uri"] = $this->product->getWebUrlOfficial() . "products?categories=" . ",PMYET BABI LO ASU KONTOL LINE BABI";
+            $json["contents"][$key]["body"]["contents"][0]["action"]["uri"] = $this->product->getWebUrlOfficial() . "products?categories=" . "QUWONTOL_MEKI_LIAR";
         }
 
         return $json;
