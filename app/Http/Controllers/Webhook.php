@@ -24,6 +24,7 @@ use App\Http\Library\Promo;
 use App\Http\Library\Event;
 use App\Http\Library\Info;
 use App\Http\Library\Brand;
+use App\Http\Library\Category;
 
 class Webhook extends Controller
 {
@@ -101,6 +102,9 @@ class Webhook extends Controller
                 break;
             case $command['brand']:
                 (new Brand)->loadTemplate($event);
+                break;
+            case $command['category']:
+                (new Category)->loadTemplate($event);
                 break;
             default:
                 (new QuickReply)->loadDefaultQuickReply($event, (new Text)->getFalseCommand()[0]["text"]);
