@@ -18,4 +18,4 @@ $router->get('/', function () use ($router) {
 });
 
 $router->post('/callback', 'Webhook@reply');
-$router->get('/callback', 'Webhook@food');
+$router->get('/food', 'Webhook@food');
