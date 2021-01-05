@@ -15,7 +15,7 @@ class ProductNewArrival{
 
     //TODO: buat API nya
 
-    private $NEW_ARRIVAL = "[5694,5297,5336,5308,5188,4507,5015,4891,5063,5027,5122,5149]";
+    private $NEW_ARRIVAL = "[5770,5721,5732,5825,4672,5166,5785,5292,5844,5697,5781,5857]";
 
     public function __construct()
     {
